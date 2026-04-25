@@ -1,0 +1,43 @@
+skills:
+  - name: Python
+    desc: 数据处理、NLP、脚本自动化
+    pct: 92
+    icon: 🐍
+  - name: SQL
+    desc: 复杂查询、性能优化、数据管道
+    pct: 88
+    icon: 🗃️
+  - name: 机器学习
+    desc: XGBoost、Sklearn、特征工程
+    pct: 80
+    icon: 📈
+  - name: AI / LLM
+    desc: RAG、Agent、Prompt工程
+    pct: 75
+    icon: 🤖
+  - name: 数据可视化
+    desc: Tableau、Plotly、数据故事
+    pct: 85
+    icon: 📊
+  - name: AI Agent
+    desc: 工作流设计、工具调用、AutoGPT
+    pct: 68
+    icon: 🧠
+  - name: 云平台
+    desc: FastAPI、Docker、AWS/阿里云
+    pct: 70
+    icon: ☁️
+
+blogs:
+  - title: 用 Python 脚本自动化日常数据报表的全流程
+    date: 2026-03-15
+    read_time: 5 min read
+    desc: 从数据抽取、清洗、到邮件自动发送，手把手搭建一套零人工干预的报表流水线。
+  - title: RAG 实战：从 0 到 1 搭建客服知识库问答系统
+    date: 2026-02-28
+    read_time: 8 min read
+    desc: 基于 LangChain + ChatGLM3，完整记录 RAG 系统的搭建思路、向量检索优化和 Prompt 调优经验。
+  - title: 用户分群怎么做？K-Means + RFM 实战笔记
+    date: 2026-01-20
+    read_time: 6 min read
+    desc: 用电商真实数据演示 RFM 模型 + K-Means 分群，找到高价值用户、流失风险用户和潜力用户。

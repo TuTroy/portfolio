@@ -3,14 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>涂炎钊 · 数据分析师转型AI应用者</title>
-  <meta name="description" content="5年数据分析经验，正在系统性学习AI大模型应用。
-熟练掌握 Python、SQL、机器学习，深入实践 RAG、Agent、Prompt工程。
-寻找数据+AI交叉领域的成长机会。">
-  <meta property="og:title" content="涂炎钊 · 数据分析师转型AI应用者">
-  <meta property="og:description" content="5年数据分析经验，正在系统性学习AI大模型应用。
-熟练掌握 Python、SQL、机器学习，深入实践 RAG、Agent、Prompt工程。
-寻找数据+AI交叉领域的成长机会。">
+  <title>{{ profile.profile.name }} · {{ profile.profile.title }}</title>
+  <meta name="description" content="{{ profile.profile.description | trim }}">
+  <meta property="og:title" content="{{ profile.profile.name }} · {{ profile.profile.title }}">
+  <meta property="og:description" content="{{ profile.profile.description | trim }}">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#0ea5e9">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
@@ -183,7 +179,7 @@
 <body>
   <!-- NAV -->
   <nav id="navbar">
-    <div class="nav-logo">🎯 涂炎钊</div>
+    <div class="nav-logo">🎯 {{ profile.profile.name }}</div>
     <ul class="nav-links">
       <li><a href="#about">关于</a></li>
       <li><a href="#skills">技能</a></li>
@@ -198,47 +194,25 @@
   <section class="hero">
     <div class="container">
       <div class="hero-inner">
-        <div class="hero-badge"><span></span>在职 · 深圳</div>
-        <h1>涂炎钊<br><span class="accent">数据分析师转型AI应用者</span></h1>
-        <p class="hero-desc">5年数据分析经验，正在系统性学习AI大模型应用。
-熟练掌握 Python、SQL、机器学习，深入实践 RAG、Agent、Prompt工程。
-寻找数据+AI交叉领域的成长机会。</p>
+        <div class="hero-badge"><span></span>{{ profile.profile.badge }}</div>
+        <h1>{{ profile.profile.name }}<br><span class="accent">{{ profile.profile.title }}</span></h1>
+        <p class="hero-desc">{{ profile.profile.description | trim }}</p>
         <div class="hero-tags">
-          
-          <span class="tag">Python</span>
-          
-          <span class="tag">SQL</span>
-          
-          <span class="tag">LLM</span>
-          
-          <span class="tag">RAG</span>
-          
-          <span class="tag">AI Agent</span>
-          
-          <span class="tag">数据可视化</span>
-          
+          {% for tag in ["Python", "SQL", "LLM", "RAG", "AI Agent", "数据可视化"] %}
+          <span class="tag">{{ tag }}</span>
+          {% endfor %}
         </div>
         <div class="hero-buttons">
           <a href="#projects" class="btn btn-primary">查看项目 →</a>
           <a href="#contact" class="btn btn-outline">下载简历</a>
         </div>
         <div class="hero-stats">
-          
+          {% for stat in profile.profile.stats %}
           <div class="stat-item">
-            <div class="stat-num">5年+</div>
-            <div class="stat-label">数据分析经验</div>
+            <div class="stat-num">{{ stat.value }}</div>
+            <div class="stat-label">{{ stat.label }}</div>
           </div>
-          
-          <div class="stat-item">
-            <div class="stat-num">3个</div>
-            <div class="stat-label">AI落地项目</div>
-          </div>
-          
-          <div class="stat-item">
-            <div class="stat-num">∞</div>
-            <div class="stat-label">持续学习中</div>
-          </div>
-          
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -254,38 +228,18 @@
       <div class="about-grid reveal">
         <div class="about-img-inner">🎯</div>
         <div class="about-text">
-          
-          
-          <p>我是涂炎钊，一名有5年经验的数据分析师，目前在电商/金融科技行业。
-过去的工作让我积累了丰富的数据清洗、可视化、业务洞察经验。
-2025年开始，我意识到AI正在改变数据分析的边界，于是开始系统性学习大模型应用：
-Prompt工程、RAG检索增强、AI Agent工作流设计、向量数据库、模型微调。
-我的目标是成为既懂数据又懂AI的复合型人才，用AI提升数据分析效率，
-用数据思维指导AI应用落地。</p>
-          
-          
+          {% for para in profile.profile.about.split('\n\n') %}
+          {% if para.strip() %}
+          <p>{{ para.strip() }}</p>
+          {% endif %}
+          {% endfor %}
           <div class="about-highlights">
-            
+            {% for hl in profile.profile.highlights %}
             <div class="hl-item">
-              <div class="hl-icon">📊</div>
-              <span>商业数据分析</span>
+              <div class="hl-icon">{{ hl.icon }}</div>
+              <span>{{ hl.text }}</span>
             </div>
-            
-            <div class="hl-item">
-              <div class="hl-icon">🤖</div>
-              <span>LLM / RAG 应用</span>
-            </div>
-            
-            <div class="hl-item">
-              <div class="hl-icon">🔗</div>
-              <span>数据+AI融合</span>
-            </div>
-            
-            <div class="hl-item">
-              <div class="hl-icon">🚀</div>
-              <span>持续学习成长</span>
-            </div>
-            
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -304,59 +258,17 @@ Prompt工程、RAG检索增强、AI Agent工作流设计、向量数据库、模
         <p>AI 正在重塑数据分析的边界。传统的描述性分析已经不够，企业需要的是能用 AI 预测、能用 LLM 解读数据、能搭建智能数据产品的复合人才。我的目标是把5年数据经验 + AI新能力结合，成为数据+AI领域的价值创造者。</p>
       </div>
       <div class="roadmap-grid">
-        
+        {% for card in profile.profile.roadmap %}
         <div class="roadmap-card reveal">
-          <div class="step">当前基础 ✅</div>
-          <h4>数据分析能力</h4>
+          <div class="step">{{ card.step }}</div>
+          <h4>{{ card.title }}</h4>
           <ul>
-            
-            <li>Python 数据处理</li>
-            
-            <li>SQL 复杂查询</li>
-            
-            <li>数据可视化</li>
-            
-            <li>业务洞察分析</li>
-            
-            <li>统计学基础</li>
-            
+            {% for item in card.points %}
+            <li>{{ item }}</li>
+            {% endfor %}
           </ul>
         </div>
-        
-        <div class="roadmap-card reveal">
-          <div class="step">正在学习 🔥</div>
-          <h4>AI核心技能</h4>
-          <ul>
-            
-            <li>Prompt Engineering</li>
-            
-            <li>RAG 检索增强</li>
-            
-            <li>AI Agent 设计</li>
-            
-            <li>向量数据库 (Chroma/FAISS)</li>
-            
-            <li>LangChain / LlamaIndex</li>
-            
-          </ul>
-        </div>
-        
-        <div class="roadmap-card reveal">
-          <div class="step">下一阶段 🎯</div>
-          <h4>进阶目标</h4>
-          <ul>
-            
-            <li>模型微调 (Fine-tuning)</li>
-            
-            <li>MLOps / LLMOps</li>
-            
-            <li>AI Agent 产品落地</li>
-            
-            <li>团队技术管理</li>
-            
-          </ul>
-        </div>
-        
+        {% endfor %}
       </div>
     </div>
   </section>
@@ -369,63 +281,15 @@ Prompt工程、RAG检索增强、AI Agent工作流设计、向量数据库、模
         <h2 class="section-title">技术能力</h2>
       </div>
       <div class="skills-grid">
-        
+        {% for skill in skills.skills %}
         <div class="skill-card reveal">
-          <div class="skill-icon">🐍</div>
-          <div class="skill-name">Python</div>
-          <div class="skill-desc">数据处理、NLP、脚本自动化</div>
-          <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
-          <div class="skill-pct">92%</div>
+          <div class="skill-icon">{{ skill.icon }}</div>
+          <div class="skill-name">{{ skill.name }}</div>
+          <div class="skill-desc">{{ skill.desc }}</div>
+          <div class="skill-bar"><div class="skill-fill" data-width="{{ skill.pct }}"></div></div>
+          <div class="skill-pct">{{ skill.pct }}%</div>
         </div>
-        
-        <div class="skill-card reveal">
-          <div class="skill-icon">🗃️</div>
-          <div class="skill-name">SQL</div>
-          <div class="skill-desc">复杂查询、性能优化、数据管道</div>
-          <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
-          <div class="skill-pct">88%</div>
-        </div>
-        
-        <div class="skill-card reveal">
-          <div class="skill-icon">📈</div>
-          <div class="skill-name">机器学习</div>
-          <div class="skill-desc">XGBoost、Sklearn、特征工程</div>
-          <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
-          <div class="skill-pct">80%</div>
-        </div>
-        
-        <div class="skill-card reveal">
-          <div class="skill-icon">🤖</div>
-          <div class="skill-name">AI / LLM</div>
-          <div class="skill-desc">RAG、Agent、Prompt工程</div>
-          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
-          <div class="skill-pct">75%</div>
-        </div>
-        
-        <div class="skill-card reveal">
-          <div class="skill-icon">📊</div>
-          <div class="skill-name">数据可视化</div>
-          <div class="skill-desc">Tableau、Plotly、数据故事</div>
-          <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
-          <div class="skill-pct">85%</div>
-        </div>
-        
-        <div class="skill-card reveal">
-          <div class="skill-icon">🧠</div>
-          <div class="skill-name">AI Agent</div>
-          <div class="skill-desc">工作流设计、工具调用、AutoGPT</div>
-          <div class="skill-bar"><div class="skill-fill" data-width="68"></div></div>
-          <div class="skill-pct">68%</div>
-        </div>
-        
-        <div class="skill-card reveal">
-          <div class="skill-icon">☁️</div>
-          <div class="skill-name">云平台</div>
-          <div class="skill-desc">FastAPI、Docker、AWS/阿里云</div>
-          <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
-          <div class="skill-pct">70%</div>
-        </div>
-        
+        {% endfor %}
       </div>
     </div>
   </section>
@@ -443,155 +307,42 @@ Prompt工程、RAG检索增强、AI Agent工作流设计、向量数据库、模
         <button class="filter-btn" data-filter="local">📝 详细案例</button>
       </div>
       <div class="projects-grid" id="projects-grid">
-        
-        <div class="project-card reveal" data-type="local">
+        {% for project in projects %}
+        <div class="project-card reveal" data-type="{{ project.type }}">
           <div class="project-thumb">
-            <span class="project-badge badge-local">
-              详细案例
+            <span class="project-badge {% if project.type == 'external' %}badge-external{% else %}badge-local{% endif %}">
+              {% if project.type == 'external' %}外部链接{% else %}详细案例{% endif %}
             </span>
-            🤖
-            
-            <a href="static/projects/ticket-classifier.html" class="project-link-icon" title="查看详情">→</a>
-            
+            {{ project.thumb }}
+            {% if project.type == 'external' %}
+            <a href="{{ project.github }}" target="_blank" class="project-link-icon" title="查看项目">↗</a>
+            {% else %}
+            <a href="static/projects/{{ project.id }}.html" class="project-link-icon" title="查看详情">→</a>
+            {% endif %}
           </div>
           <div class="project-body">
-            <div class="project-title">客服工单智能分类助手</div>
-            <div class="project-desc">基于 LLM + RAG 构建客服工单分类与回复推荐系统，日均处理工单1200+，分类准确率91%。点击查看完整技术方案。</div>
+            <div class="project-title">{{ project.title }}</div>
+            <div class="project-desc">{{ project.desc }}</div>
             <div class="project-metrics">
-              
-              <span class="metric green">日均 1200+ 工单</span>
-              
-              <span class="metric ">准确率 91%</span>
-              
+              {% for m in project.metrics %}
+              <span class="metric {% if m.highlight %}green{% endif %}">{{ m.value }}</span>
+              {% endfor %}
             </div>
             <div class="project-tags">
-              
-              <span class="ptag">LLM</span>
-              
-              <span class="ptag">RAG</span>
-              
-              <span class="ptag">LangChain</span>
-              
+              {% for tag in project.tags %}
+              <span class="ptag">{{ tag }}</span>
+              {% endfor %}
             </div>
             <div class="project-footer">
-              
-              <a href="static/projects/ticket-classifier.html" class="proj-link local">查看详情 →</a>
-              
+              {% if project.type == 'external' %}
+              <a href="{{ project.github }}" target="_blank" class="proj-link external">GitHub ↗</a>
+              {% else %}
+              <a href="static/projects/{{ project.id }}.html" class="proj-link local">查看详情 →</a>
+              {% endif %}
             </div>
           </div>
         </div>
-        
-        <div class="project-card reveal" data-type="local">
-          <div class="project-thumb">
-            <span class="project-badge badge-local">
-              详细案例
-            </span>
-            🛠️
-            
-            <a href="static/projects/annotation-platform.html" class="project-link-icon" title="查看详情">→</a>
-            
-          </div>
-          <div class="project-body">
-            <div class="project-title">数据标注平台（内部工具）</div>
-            <div class="project-desc">用 FastAPI + Vue3 搭建的内部标注平台，支持6种任务类型，日均标注量5000+，效率提升35%。点击查看架构设计。</div>
-            <div class="project-metrics">
-              
-              <span class="metric green">6 种任务类型</span>
-              
-              <span class="metric ">效率提升 35%</span>
-              
-            </div>
-            <div class="project-tags">
-              
-              <span class="ptag">FastAPI</span>
-              
-              <span class="ptag">Vue3</span>
-              
-              <span class="ptag">PostgreSQL</span>
-              
-            </div>
-            <div class="project-footer">
-              
-              <a href="static/projects/annotation-platform.html" class="proj-link local">查看详情 →</a>
-              
-            </div>
-          </div>
-        </div>
-        
-        <div class="project-card reveal" data-type="external">
-          <div class="project-thumb">
-            <span class="project-badge badge-external">
-              外部链接
-            </span>
-            📊
-            
-            <a href="" target="_blank" class="project-link-icon" title="查看项目">↗</a>
-            
-          </div>
-          <div class="project-body">
-            <div class="project-title">电商用户流失预测系统</div>
-            <div class="project-desc">基于 XGBoost 构建用户流失预警模型，提前14天预测流失，准确率83%。落地后留存提升12%。</div>
-            <div class="project-metrics">
-              
-              <span class="metric green">准确率 83%</span>
-              
-              <span class="metric ">留存提升 12%</span>
-              
-            </div>
-            <div class="project-tags">
-              
-              <span class="ptag">Python</span>
-              
-              <span class="ptag">XGBoost</span>
-              
-              <span class="ptag">SQL</span>
-              
-            </div>
-            <div class="project-footer">
-              
-              <a href="" target="_blank" class="proj-link external">GitHub ↗</a>
-              
-            </div>
-          </div>
-        </div>
-        
-        <div class="project-card reveal" data-type="external">
-          <div class="project-thumb">
-            <span class="project-badge badge-external">
-              外部链接
-            </span>
-            📈
-            
-            <a href="" target="_blank" class="project-link-icon" title="查看项目">↗</a>
-            
-          </div>
-          <div class="project-body">
-            <div class="project-title">销售数据分析看板</div>
-            <div class="project-desc">用 Tableau 构建集团级销售看板，打通5个数据源，支持日报自动刷新，管理层日活40+用户。</div>
-            <div class="project-metrics">
-              
-              <span class="metric green">5 个数据源打通</span>
-              
-              <span class="metric ">日活 40+ 用户</span>
-              
-            </div>
-            <div class="project-tags">
-              
-              <span class="ptag">Tableau</span>
-              
-              <span class="ptag">SQL</span>
-              
-              <span class="ptag">ETL</span>
-              
-            </div>
-            <div class="project-footer">
-              
-              <a href="" target="_blank" class="proj-link external">GitHub ↗</a>
-              
-            </div>
-          </div>
-        </div>
-        
+        {% endfor %}
       </div>
     </div>
   </section>
@@ -604,34 +355,16 @@ Prompt工程、RAG检索增强、AI Agent工作流设计、向量数据库、模
         <h2 class="section-title">最近文章</h2>
       </div>
       <div class="blogs-list">
-        
+        {% for blog in skills.blogs %}
         <a href="#" class="blog-item reveal">
           <div class="blog-top">
-            <div class="blog-title">用 Python 脚本自动化日常数据报表的全流程</div>
+            <div class="blog-title">{{ blog.title }}</div>
             <div class="blog-arrow">→</div>
           </div>
-          <div class="blog-meta"><span>2026-03-15</span><span>5 min read read</span></div>
-          <div class="blog-desc">从数据抽取、清洗、到邮件自动发送，手把手搭建一套零人工干预的报表流水线。</div>
+          <div class="blog-meta"><span>{{ blog.date }}</span><span>{{ blog.read_time }} read</span></div>
+          <div class="blog-desc">{{ blog.desc }}</div>
         </a>
-        
-        <a href="#" class="blog-item reveal">
-          <div class="blog-top">
-            <div class="blog-title">RAG 实战：从 0 到 1 搭建客服知识库问答系统</div>
-            <div class="blog-arrow">→</div>
-          </div>
-          <div class="blog-meta"><span>2026-02-28</span><span>8 min read read</span></div>
-          <div class="blog-desc">基于 LangChain + ChatGLM3，完整记录 RAG 系统的搭建思路、向量检索优化和 Prompt 调优经验。</div>
-        </a>
-        
-        <a href="#" class="blog-item reveal">
-          <div class="blog-top">
-            <div class="blog-title">用户分群怎么做？K-Means + RFM 实战笔记</div>
-            <div class="blog-arrow">→</div>
-          </div>
-          <div class="blog-meta"><span>2026-01-20</span><span>6 min read read</span></div>
-          <div class="blog-desc">用电商真实数据演示 RFM 模型 + K-Means 分群，找到高价值用户、流失风险用户和潜力用户。</div>
-        </a>
-        
+        {% endfor %}
       </div>
     </div>
   </section>
@@ -647,11 +380,11 @@ Prompt工程、RAG检索增强、AI Agent工作流设计、向量数据库、模
         <div class="contact-info">
           <p>正在寻找数据+AI相关的工作机会，也欢迎技术交流。无论是数据分析、AI项目还是产品合作，都可以联系我。</p>
           <div class="contact-links">
-            <a href="mailto:113****258@qq.com" class="contact-item">
-              <div class="ci-icon">✉️</div><span>113****258@qq.com</span>
+            <a href="mailto:{{ profile.profile.contact.email }}" class="contact-item">
+              <div class="ci-icon">✉️</div><span>{{ profile.profile.contact.email }}</span>
             </a>
             <a href="#" class="contact-item">
-              <div class="ci-icon">💬</div><span>WeChat: yan***_tu</span>
+              <div class="ci-icon">💬</div><span>WeChat: {{ profile.profile.contact.wechat }}</span>
             </a>
           </div>
         </div>
@@ -662,9 +395,9 @@ Prompt工程、RAG检索增强、AI Agent工作流设计、向量数据库、模
 
   <footer>
     <div class="socials">
-      <a href="" title="GitHub">🐙</a>
+      <a href="{{ profile.profile.contact.github }}" title="GitHub">🐙</a>
     </div>
-    <p>© 2026 涂炎钊 · 数据分析师转型AI应用者</p>
+    <p>© 2026 {{ profile.profile.name }} · {{ profile.profile.title }}</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
@@ -700,7 +433,7 @@ Prompt工程、RAG检索增强、AI Agent工作流设计、向量数据库、模
             const fd = new FormData();
             fd.append('email', form.email);
             fd.append('message', form.message);
-            const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {method: 'POST', body: fd});
+            const res = await fetch('https://formspree.io/f/{{ profile.profile.formspree_id }}', {method: 'POST', body: fd});
             if (res.ok) {submitSuccess.value = true; form.email = ''; form.message = ''}
             else ElMessage.error('发送失败，请重试');
           } catch (e) {ElMessage.error('请检查表单填写是否正确');}

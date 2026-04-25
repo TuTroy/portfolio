@@ -1,0 +1,89 @@
+projects:
+  - id: ticket-classifier
+    type: local
+    title: 客服工单智能分类助手
+    desc: 基于 LLM + RAG 构建客服工单分类与回复推荐系统，日均处理工单1200+，分类准确率91%。点击查看完整技术方案。
+    thumb: 🤖
+    metrics:
+      - value: 日均 1200+ 工单
+        highlight: true
+      - value: 准确率 91%
+        highlight: false
+    tags:
+      - LLM
+      - RAG
+      - LangChain
+    status: 进行中
+    year: 2026
+    overview: |
+      基于 LLM + RAG 构建客服工单分类与回复推荐系统，日均处理工单1200+，分类准确率91%。
+      通过检索增强生成技术，结合企业历史工单知识库，实现智能分类和推荐回复。
+    architecture:
+      - LLM：调用 GPT / Claude 系列模型
+      - RAG：LangChain + Chroma 向量数据库
+      - 知识库：历史工单 + 产品文档
+      - API：FastAPI 提供推理接口
+    achievements:
+      - 日均处理 1200+ 工单
+      - 分类准确率 91%
+      - 客服响应效率提升 40%
+
+  - id: annotation-platform
+    type: local
+    title: 数据标注平台（内部工具）
+    desc: 用 FastAPI + Vue3 搭建的内部标注平台，支持6种任务类型，日均标注量5000+，效率提升35%。点击查看架构设计。
+    thumb: 🛠️
+    metrics:
+      - value: 6 种任务类型
+        highlight: true
+      - value: 效率提升 35%
+        highlight: false
+    tags:
+      - FastAPI
+      - Vue3
+      - PostgreSQL
+    status: 已完成
+    year: 2026
+    overview: |
+      用 FastAPI + Vue3 搭建的内部标注平台，支持6种任务类型，日均标注量5000+，效率提升35%。
+    architecture:
+      - 后端：FastAPI + SQLAlchemy
+      - 前端：Vue3 + Element Plus
+      - 数据库：PostgreSQL
+      - 部署：Docker 容器化
+    achievements:
+      - 日均标注量 5000+
+      - 支持 6 种任务类型
+      - 标注效率提升 35%
+
+  - id: churn-prediction
+    type: external
+    title: 电商用户流失预测系统
+    desc: 基于 XGBoost 构建用户流失预警模型，提前14天预测流失，准确率83%。落地后留存提升12%。
+    thumb: 📊
+    metrics:
+      - value: 准确率 83%
+        highlight: true
+      - value: 留存提升 12%
+        highlight: false
+    tags:
+      - Python
+      - XGBoost
+      - SQL
+    github: ""
+
+  - id: sales-dashboard
+    type: external
+    title: 销售数据分析看板
+    desc: 用 Tableau 构建集团级销售看板，打通5个数据源，支持日报自动刷新，管理层日活40+用户。
+    thumb: 📈
+    metrics:
+      - value: 5 个数据源打通
+        highlight: true
+      - value: 日活 40+ 用户
+        highlight: false
+    tags:
+      - Tableau
+      - SQL
+      - ETL
+    github: ""
