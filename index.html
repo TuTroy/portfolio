@@ -194,7 +194,7 @@
     <li><a href="#blogs">文章</a></li>
     <li><a href="#contact">联系</a></li>
   </ul>
-  <a href="mailto:yanzhao.tu@email.com" class="nav-cta">✉️ 联系我</a>
+  <a href="mailto:113****258@qq.com" class="nav-cta">✉️ 联系我</a>
 </nav>
 
 
@@ -634,11 +634,11 @@
         <p>正在寻找数据+AI相关的工作机会，也欢迎技术交流。 无论是数据分析、AI项目还是产品合作，都可以联系我。
 </p>
         <div class="contact-links">
-          <a href="mailto:yanzhao.tu@email.com" class="contact-item">
-            <div class="ci-icon">✉️</div><span>yanzhao.tu@email.com</span>
+          <a href="mailto:113****258@qq.com" class="contact-item">
+            <div class="ci-icon">✉️</div><span>113****258@qq.com</span>
           </a>
           <a href="#" class="contact-item">
-            <div class="ci-icon">💬</div><span>WeChat: yanzhao_tu</span>
+            <div class="ci-icon">💬</div><span>WeChat: yan***_tu</span>
           </a>
         </div>
       </div>
@@ -690,10 +690,10 @@ const App={
         const fd=new FormData();
         fd.append('email',form.email);
         fd.append('message',form.message);
-        const res=await fetch('https://formspree.io/f/YOUR_FORM_ID',{method:'POST',body:fd,headers:{Accept:'application/json'}});
-        if(res.ok){submitSuccess.value=true;form.email='';form.message='';}
+        const res=await fetch('https://formspree.io/f/YOUR_FORM_ID',{method:'POST',body:fd});
+        if(res.ok){submitSuccess.value=true;form.email='';form.message=''}
         else ElMessage.error('发送失败，请重试');
-      }catch(){ElMessage.error('请检查表单填写是否正确');}
+      }catch(e){ElMessage.error('请检查表单填写是否正确');}
       finally{submitting.value=false;}
     };
     return{form,rules,formRef,submitting,submitSuccess,submitForm};
