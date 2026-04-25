@@ -6,6 +6,9 @@ profile:
     5年数据分析经验，专注 AI 大模型应用落地。
     擅长大数据处理、机器学习、RAG 检索与 AI Agent 设计。
     记录从数据分析师到 AI 应用者的探索与实践。
+  hero:
+    title: 数据会思考
+    subtitle: 数据分析 × AI 应用实践
   stats:
     - value: 5年+
       label: 数据分析

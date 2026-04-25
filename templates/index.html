@@ -66,6 +66,7 @@
     .hero h1{font-size:46px;font-weight:950;line-height:1.1;letter-spacing:-1.5px;margin-bottom:18px;animation:fadeDown .5s .1s ease both}
     .hero h1 .accent{background:linear-gradient(135deg,var(--accent),#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .hero-desc{font-size:16px;color:var(--text2);line-height:1.9;margin-bottom:28px;animation:fadeDown .5s .2s ease both}
+    .hero-subtitle{font-size:18px;font-weight:700;color:var(--accent);letter-spacing:.5px;margin-bottom:20px;animation:fadeDown .5s .15s ease both}
     .hero-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:32px;animation:fadeDown .5s .25s ease both}
     .tag{padding:6px 14px;border-radius:50px;background:var(--surface);border:1px solid var(--border);font-size:12px;font-weight:600;color:var(--text2);transition:all .2s}
     .tag:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
@@ -236,7 +237,8 @@
     <div class="container">
       <div class="hero-inner">
         <div class="hero-badge"><span></span>{{ profile.profile.badge }}</div>
-        <h1>数据 / AI<br><span class="accent">实践者</span></h1>
+        <h1>{{ profile.profile.hero.title }}</h1>
+        <p class="hero-subtitle">{{ profile.profile.hero.subtitle }}</p>
         <p class="hero-desc">{{ profile.profile.description | trim }}</p>
         <div class="hero-tags">
           {% for tag in ["Python", "SQL", "LLM", "RAG", "AI Agent", "数据可视化"] %}
