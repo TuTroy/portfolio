@@ -32,6 +32,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     print(f"INFO: Portfolio serving {OUTPUT_DIR} on http://localhost:{PORT}", file=sys.stderr)
+    socketserver.TCPServer.allow_reuse_address = True
     with socketserver.TCPServer(("", PORT), SPAHandler) as httpd:
         try:
             httpd.serve_forever()

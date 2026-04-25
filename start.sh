@@ -24,8 +24,8 @@ start() {
     PID=$(find_pid)
     if [ -n "$PID" ]; then
         echo "⚠️  端口 $PORT 已被占用 (PID: $PID)，先停止..."
-        kill $PID 2>/dev/null
-        sleep 1
+        kill -9 $PID 2>/dev/null
+        sleep 2
     fi
 
     # 构建项目
@@ -62,7 +62,7 @@ stop() {
     echo "🛑 停止 Portfolio 服务..."
     PID=$(find_pid)
     if [ -n "$PID" ]; then
-        kill $PID 2>/dev/null
+        kill -9 $PID 2>/dev/null
         sleep 1
         echo "✅ 已停止 (PID: $PID)"
     else
