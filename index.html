@@ -690,7 +690,7 @@ const App={
         const fd=new FormData();
         fd.append('email',form.email);
         fd.append('message',form.message);
-        const res=await fetch('https://formspree.io/f/YOUR_FORM_ID',{method:'POST',body:fd,headers:{Accept:'application/json'}});
+        const res=await fetch('https://formspree.io/f/YOUR_FORM_ID',{method:'POST',body:fd});
         if(res.ok){submitSuccess.value=true;form.email='';form.message='';}
         else ElMessage.error('发送失败，请重试');
       }catch(){ElMessage.error('请检查表单填写是否正确');}
