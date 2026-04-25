@@ -1,58 +1,54 @@
 profile:
-  name: 涂炎钊
-  title: 数据分析师转型AI应用者
-  badge: 在职 · 深圳
+  name: Troy
+  title: 数据 / AI 实践者
+  badge: 深圳
   description: |
-    5年数据分析经验，正在系统性学习AI大模型应用。
-    熟练掌握 Python、SQL、机器学习，深入实践 RAG、Agent、Prompt工程。
-    寻找数据+AI交叉领域的成长机会。
+    5年数据分析经验，专注 AI 大模型应用落地。
+    擅长大数据处理、机器学习、RAG 检索与 AI Agent 设计。
+    记录从数据分析师到 AI 应用者的探索与实践。
   stats:
     - value: 5年+
-      label: 数据分析经验
+      label: 数据分析
     - value: 3个
-      label: AI落地项目
+      label: AI 项目
     - value: ∞
-      label: 持续学习中
+      label: 持续探索
   about: |
-    我是涂炎钊，一名有5年经验的数据分析师，目前在电商/金融科技行业。
-    过去的工作让我积累了丰富的数据清洗、可视化、业务洞察经验。
-    2025年开始，我意识到AI正在改变数据分析的边界，于是开始系统性学习大模型应用：
-    Prompt工程、RAG检索增强、AI Agent工作流设计、向量数据库、模型微调。
-    我的目标是成为既懂数据又懂AI的复合型人才，用AI提升数据分析效率，
-    用数据思维指导AI应用落地。
+    涂炎钊（Troy），坐标深圳，数据分析师出身。
+    过去5年深耕电商/金融科技领域，擅长 Python、SQL、数据可视化与业务洞察。
+    2025年起系统学习大模型应用：Prompt工程、RAG、AI Agent、向量数据库。
+    这里是个人作品集，记录技术实践与成长思考。
   highlights:
     - icon: 📊
-      text: 商业数据分析
+      text: 数据分析
     - icon: 🤖
-      text: LLM / RAG 应用
+      text: AI 应用
     - icon: 🔗
-      text: 数据+AI融合
-    - icon: 🚀
-      text: 持续学习成长
+      text: RAG / Agent
+    - icon: 📝
+      text: 技术沉淀
   roadmap:
-    - step: 当前基础 ✅
-      title: 数据分析能力
+    - step: 基础 ✅
+      title: 数据能力
       points:
-        - Python 数据处理
-        - SQL 复杂查询
+        - Python / SQL
         - 数据可视化
-        - 业务洞察分析
-        - 统计学基础
-    - step: 正在学习 🔥
-      title: AI核心技能
+        - 机器学习
+        - 业务洞察
+    - step: 进行中 🔥
+      title: AI 技能
       points:
-        - Prompt Engineering
-        - RAG 检索增强
-        - AI Agent 设计
-        - 向量数据库 (Chroma/FAISS)
-        - LangChain / LlamaIndex
-    - step: 下一阶段 🎯
-      title: 进阶目标
+        - Prompt 工程
+        - RAG 检索
+        - AI Agent
+        - LangChain
+    - step: 计划中 🎯
+      title: 进阶方向
       points:
-        - 模型微调 (Fine-tuning)
-        - MLOps / LLMOps
-        - AI Agent 产品落地
-        - 团队技术管理
+        - 模型微调
+        - MLOps
+        - 产品落地
+        - 技术输出
   contact:
     email: 113****258@qq.com
     wechat: yan***_tu
