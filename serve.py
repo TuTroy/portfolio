@@ -1,21 +1,18 @@
 #!/usr/bin/env python3
 """
 Portfolio 开发服务器
-直接服务 output/ 目录（构建产物）
+服务 output/ 目录（构建产物）
 """
 import http.server
 import socketserver
-import os
 import sys
 from pathlib import Path
 
 PORT = 8080
-SCRIPT_DIR = Path(__file__).parent.resolve()
-OUTPUT_DIR = SCRIPT_DIR / "output"
+OUTPUT_DIR = Path(__file__).parent / "output"
 
 
 class SPAHandler(http.server.SimpleHTTPRequestHandler):
-    """支持 SPA 的静态文件服务"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(OUTPUT_DIR), **kwargs)
 
@@ -31,16 +28,13 @@ class SPAHandler(http.server.SimpleHTTPRequestHandler):
 
 if __name__ == "__main__":
     if not OUTPUT_DIR.exists():
-        print("❌ output/ 目录不存在，请先运行: python3 scripts/build.py")
+        print(f"ERROR: {OUTPUT_DIR} not found. Run: python3 scripts/build.py", file=sys.stderr)
         sys.exit(1)
 
-    print(f"✅ Portfolio 已启动: http://localhost:{PORT}")
-    print(f"📂 服务目录: {OUTPUT_DIR}")
-    print(f"🔨 构建命令: python3 scripts/build.py")
-    print(f"\n按 Ctrl+C 停止服务")
-    try:
-        with socketserver.TCPServer(("", PORT), SPAHandler) as httpd:
+    print(f"INFO: Portfolio serving {OUTPUT_DIR} on http://localhost:{PORT}", file=sys.stderr)
+    with socketserver.TCPServer(("", PORT), SPAHandler) as httpd:
+        try:
             httpd.serve_forever()
-    except KeyboardInterrupt:
-        print("\n👋 服务已停止")
-        sys.exit(0)
+        except KeyboardInterrupt:
+            print("INFO: Server stopped", file=sys.stderr)
+            sys.exit(0)
