@@ -1,0 +1,64 @@
+projects:
+  - id: customer-churn
+    title: 电商用户流失预测系统
+    type: external
+    external_url: ""
+    thumb_icon: "📊"
+    badge: 外部链接
+    badge_class: badge-external
+    desc: 基于 XGBoost 构建用户流失预警模型，提前14天预测流失，准确率83%。落地后留存提升12%。
+    metrics:
+      - 准确率 83%
+      - 留存提升 12%
+    tags:
+      - Python
+      - XGBoost
+      - SQL
+
+  - id: ticket-classifier
+    title: 客服工单智能分类助手
+    type: local
+    local_path: static/projects/ticket-classifier.html
+    thumb_icon: "🤖"
+    badge: 详细案例
+    badge_class: badge-local
+    desc: 基于 LLM + RAG 构建客服工单分类与回复推荐系统，日均处理工单1200+，分类准确率91%。点击查看完整技术方案。
+    metrics:
+      - 日均 1200+ 工单
+      - 准确率 91%
+    tags:
+      - LLM
+      - RAG
+      - LangChain
+
+  - id: sales-dashboard
+    title: 销售数据分析看板
+    type: external
+    external_url: ""
+    thumb_icon: "📈"
+    badge: 外部链接
+    badge_class: badge-external
+    desc: 用 Tableau 构建集团级销售看板，打通5个数据源，支持日报自动刷新，管理层日活40+用户。
+    metrics:
+      - 5 个数据源打通
+      - 日活 40+ 用户
+    tags:
+      - Tableau
+      - SQL
+      - ETL
+
+  - id: annotation-platform
+    title: 数据标注平台（内部工具）
+    type: local
+    local_path: static/projects/annotation-platform.html
+    thumb_icon: "🛠️"
+    badge: 详细案例
+    badge_class: badge-local
+    desc: 用 FastAPI + Vue3 搭建的内部标注平台，支持6种任务类型，日均标注量5000+，效率提升35%。点击查看架构设计。
+    metrics:
+      - 6 种任务类型
+      - 效率提升 35%
+    tags:
+      - FastAPI
+      - Vue3
+      - PostgreSQL

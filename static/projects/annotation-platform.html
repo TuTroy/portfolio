@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据标注平台 · 涂炎钊</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f7f9fc;color:#0f172a;line-height:1.7}
+    .top-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(247,249,252,.9);border-bottom:1px solid #e4e9f0;backdrop-filter:blur(24px)}
+    .back-link{color:#0ea5e9;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
+    .back-link:hover{gap:12px}
+    .container{max-width:800px;margin:0 auto;padding:100px 32px 80px}
+    .project-header{background:#fff;border:1px solid #e4e9f0;border-radius:20px;padding:40px;margin-bottom:32px;box-shadow:0 1px 3px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.04)}
+    .project-badge{display:inline-flex;padding:4px 12px;border-radius:50px;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.2);font-size:11px;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px}
+    h1{font-size:32px;font-weight:800;letter-spacing:-.5px;margin-bottom:16px}
+    .project-meta{display:flex;gap:24px;flex-wrap:wrap;font-size:14px;color:#94a3b8}
+    .project-meta span{display:flex;align-items:center;gap:6px}
+    .content-block{background:#fff;border:1px solid #e4e9f0;border-radius:20px;padding:32px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.04)}
+    h2{font-size:20px;font-weight:700;margin-bottom:16px}
+    p{color:#334155;font-size:15px;line-height:1.85;margin-bottom:12px}
+    ul{list-style:none;color:#334155;font-size:15px}
+    ul li{padding:6px 0;padding-left:20px;position:relative}
+    ul li::before{content:'→';position:absolute;left:0;color:#0ea5e9;font-size:12px;top:8px}
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="../index.html#projects" class="back-link">← 返回项目列表</a>
+  </nav>
+  <div class="container">
+    <div class="project-header">
+      <div class="project-badge">详细案例</div>
+      <h1>数据标注平台（内部工具）</h1>
+      <div class="project-meta">
+        <span>🛠️ FastAPI + Vue3</span>
+        <span>📅 2026</span>
+        <span>⏱️ 已完成</span>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h2>项目概述</h2>
+      <p>用 FastAPI + Vue3 搭建的内部标注平台，支持6种任务类型，日均标注量5000+，效率提升35%。</p>
+      <p>为 AI 训练数据团队提供高效、规范的标注工作流。</p>
+    </div>
+
+    <div class="content-block">
+      <h2>技术架构</h2>
+      <ul>
+        <li>前端：Vue3 + Element Plus</li>
+        <li>后端：FastAPI + PostgreSQL</li>
+        <li>任务流：支持6种标注类型</li>
+        <li>部署：Docker 容器化</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h2>核心成果</h2>
+      <ul>
+        <li>支持 6 种任务类型</li>
+        <li>日均标注量 5000+</li>
+        <li>标注效率提升 35%</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

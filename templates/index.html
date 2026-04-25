@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner reveal">
+      <div class="hero-badge"><span></span> {{ title }}</div>
+      <h1>{% for line in hero_subtitle.split('\n') %}{% if not loop.first %}<br>{% endif %}{{ line }}{% endfor %}</h1>
+      <p class="hero-desc">{{ description }}</p>
+      <div class="hero-tags">
+        {% for tag in hero_tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">查看项目 →</a>
+        <a href="#transition" class="btn btn-outline">转型路线图</a>
+      </div>
+      <div class="hero-stats">
+        {% for stat in stats %}
+        <div class="stat-item">
+          <div class="stat-num">{{ stat.value }}</div>
+          <div class="stat-label">{{ stat.label }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">关于我</div>
+      <h2 class="section-title">从数据到AI的转型之路</h2>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-img-inner">🎯</div>
+      <div class="about-text">
+        {% for para in about_paragraphs %}
+        <p>{{ para }}</p>
+        {% endfor %}
+        <div class="about-highlights">
+          {% for hl in about_highlights %}
+          <div class="hl-item"><div class="hl-icon">{{ hl.icon }}</div><span>{{ hl.text }}</span></div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="transition">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">转型路线</div>
+      <h2 class="section-title">数据分析师 → AI应用者</h2>
+    </div>
+    <div class="roadmap-intro reveal">
+      <h3>🎯 为什么做这个转型？</h3>
+      <p>{{ roadmap_intro }}</p>
+    </div>
+    <div class="roadmap-grid">
+      {% for card in roadmap %}
+      <div class="roadmap-card reveal">
+        <div class="step">{{ card.step }}</div>
+        <h4>{{ card.title }}</h4>
+        <ul>
+          {% for b in card.bullets %}
+          <li>{{ b }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">技能栈</div>
+      <h2 class="section-title">数据 + AI 双栈能力</h2>
+    </div>
+    <div class="skills-grid">
+      {% for s in skills %}
+      <div class="skill-card reveal">
+        <div class="skill-icon">{{ s.icon }}</div>
+        <div class="skill-name">{{ s.name }}</div>
+        <div class="skill-desc">{{ s.desc }}</div>
+        <div class="skill-bar"><div class="skill-fill" data-width="{{ s.pct }}"></div></div>
+        <div class="skill-pct">{{ s.pct }}%</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">项目作品</div>
+      <h2 class="section-title">实践案例</h2>
+    </div>
+    <div class="projects-filter reveal">
+      <button class="filter-btn active" data-filter="all">全部</button>
+      <button class="filter-btn" data-filter="external">🌐 外部链接</button>
+      <button class="filter-btn" data-filter="local">📝 详细案例</button>
+    </div>
+    <div class="projects-grid" id="projects-grid">
+      {% for p in projects %}
+      <div class="project-card reveal" data-type="{{ p.type }}">
+        <div class="project-thumb">
+          <span class="project-badge {{ p.badge_class }}">{{ p.badge }}</span>
+          {{ p.thumb_icon }}
+          {% if p.type == 'external' %}
+          <a href="{{ p.external_url }}" target="_blank" class="project-link-icon" title="查看项目">↗</a>
+          {% else %}
+          <a href="{{ p.local_path }}" class="project-link-icon" title="查看详情">→</a>
+          {% endif %}
+        </div>
+        <div class="project-body">
+          <div class="project-title">{{ p.title }}</div>
+          <div class="project-desc">{{ p.desc }}</div>
+          {% if p.metrics %}
+          <div class="project-metrics">
+            {% for m in p.metrics %}
+            <span class="metric{% if loop.first %} green{% endif %}">{{ m }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+          <div class="project-tags">
+            {% for t in p.tags %}
+            <span class="ptag">{{ t }}</span>
+            {% endfor %}
+          </div>
+          <div class="project-footer">
+            {% if p.type == 'external' %}
+            <a href="{{ p.external_url }}" target="_blank" class="proj-link external">GitHub ↗</a>
+            {% else %}
+            <a href="{{ p.local_path }}" class="proj-link local">查看详情 →</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- BLOGS -->
+<section id="blogs">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">技术博客</div>
+      <h2 class="section-title">最近文章</h2>
+    </div>
+    <div class="blogs-list">
+      {% for b in blogs %}
+      <a href="{{ b.url }}" class="blog-item reveal">
+        <div class="blog-top">
+          <div class="blog-title">{{ b.title }}</div>
+          <div class="blog-arrow">→</div>
+        </div>
+        <div class="blog-meta"><span>{{ b.date }}</span><span>{{ b.read_time }} min read</span></div>
+        <div class="blog-desc">{{ b.desc }}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">联系方式</div>
+      <h2 class="section-title">合作 / 交流</h2>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <p>{{ contact_intro }}</p>
+        <div class="contact-links">
+          <a href="mailto:{{ email }}" class="contact-item">
+            <div class="ci-icon">✉️</div><span>{{ email }}</span>
+          </a>
+          <a href="#" class="contact-item">
+            <div class="ci-icon">💬</div><span>WeChat: {{ wechat }}</span>
+          </a>
+        </div>
+      </div>
+      <div id="app" class="contact-form-wrapper"></div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+const{createApp,ref,reactive}=Vue;
+const{ElMessage,ElForm,ElFormItem,ElInput,ElButton,ElResult}=ElementPlus;
+
+const App={
+  components:{ElForm,ElFormItem,ElInput,ElButton,ElResult},
+  setup(){
+    const form=reactive({email:'',message:''});
+    const formRef=ref(null);
+    const submitting=ref(false);
+    const submitSuccess=ref(false);
+    const validateEmail=(rule,value,callback)=>{
+      if(!value)callback(new Error('请输入邮箱'));
+      else if(!/^[^@]+@[^@]+\.[^@]+$/.test(value))callback(new Error('请输入有效邮箱'));
+      else callback();
+    };
+    const rules={
+      email:[{validator:validateEmail,trigger:'blur'}],
+      message:[
+        {required:true,message:'请输入想说的话',trigger:'blur'},
+        {min:5,message:'至少5个字符',trigger:'blur'}
+      ]
+    };
+    const submitForm=async()=>{
+      if(!formRef.value)return;
+      try{
+        await formRef.value.validate();
+        submitting.value=true;
+        const fd=new FormData();
+        fd.append('email',form.email);
+        fd.append('message',form.message);
+        const res=await fetch('https://formspree.io/f/{{ formspree_id }}',{method:'POST',body:fd,headers:{Accept:'application/json'}});
+        if(res.ok){submitSuccess.value=true;form.email='';form.message='';}
+        else ElMessage.error('发送失败，请重试');
+      }catch(){ElMessage.error('请检查表单填写是否正确');}
+      finally{submitting.value=false;}
+    };
+    return{form,rules,formRef,submitting,submitSuccess,submitForm};
+  },
+  template:`
+    <el-form ref="formRef" :model="form" :rules="rules" label-position="top" v-if="!submitSuccess">
+      <el-form-item label="你的邮箱" prop="email">
+        <el-input v-model="form.email" placeholder="you@email.com" size="large" />
+      </el-form-item>
+      <el-form-item label="想说的话" prop="message">
+        <el-input v-model="form.message" type="textarea" :rows="4" placeholder="说点什么..." resize="none" />
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" size="large" :loading="submitting" @click="submitForm" style="border-radius:50px;padding:14px 32px;font-weight:700;">
+          发送消息 →
+        </el-button>
+      </el-form-item>
+    </el-form>
+    <el-result v-else icon="success" title="消息已发送" sub-title="感谢你的留言，我会尽快回复你">
+      <template #extra>
+        <el-button type="primary" @click="submitSuccess=false" style="border-radius:50px;">再发一条</el-button>
+      </template>
+    </el-result>
+  `
+};
+createApp(App).use(ElementPlus).mount('#app');
+
+// Scroll animations
+const reveals=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      const f=e.target.querySelector('.skill-fill');
+      if(f)f.style.width=f.dataset.width+'%';
+    }
+  });
+},{threshold:.1});
+reveals.forEach(el=>io.observe(el));
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20));
+
+// Project filter
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    document.querySelectorAll('.project-card').forEach(c=>{
+      c.style.display=(f==='all'||c.dataset.type===f)?'':'none';
+    });
+  });
+});
+</script>
+{% endblock %}
