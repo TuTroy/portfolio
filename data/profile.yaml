@@ -14,8 +14,8 @@ profile:
       label: 数据领域
     - value: AI+
       label: 转型进行中
-    - value: 持续
-      label: 学习中
+    - value: ∞
+      label: 持续学习中
   about: |
     涂炎钊（Troy），深圳，本科毕业。
     5年数据领域经验：曾从事运维工程与大数据开发，现专注数据分析与业务洞察。
