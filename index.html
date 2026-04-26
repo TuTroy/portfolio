@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Troy · 数据分析师转型AI应用者</title>
+  <meta name="description" content="5年数据领域经验，深耕大数据处理与业务数据分析。
+2025年起系统学习大模型应用：Prompt工程、RAG、AI Agent、向量数据库。
+擅长大数据分析、机器学习建模与 AI 应用落地，致力于成为 AI 应用工程师。">
+  <meta property="og:title" content="Troy · 数据分析师转型AI应用者">
+  <meta property="og:description" content="5年数据领域经验，深耕大数据处理与业务数据分析。
+2025年起系统学习大模型应用：Prompt工程、RAG、AI Agent、向量数据库。
+擅长大数据分析、机器学习建模与 AI 应用落地，致力于成为 AI 应用工程师。">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0ea5e9">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@2.5.0/theme-chalk/index.css">
+  <style>
+    :root {
+      --bg:#f5f7fb;
+      --surface:#fff;
+      --surface2:#f0f4f8;
+      --border:#e2e8f0;
+      --accent:#0ea5e9;
+      --accent-light:rgba(14,165,233,.07);
+      --accent-dark:#0284c7;
+      --text:#0f172a;
+      --text2:#475569;
+      --muted:#94a3b8;
+      --green:#16a34a;
+      --green-light:rgba(74,222,128,.08);
+      --purple:#7c3aed;
+      --radius:12px;
+      --radius-sm:8px;
+      --shadow:0 1px 3px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.04);
+      --shadow-md:0 2px 6px rgba(0,0,0,.05),0 1px 2px rgba(0,0,0,.04);
+      --shadow-hover:0 8px 30px rgba(14,165,233,.12);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+    ::selection{background:rgba(14,165,233,.12)}
+
+    /* ── NAV ── */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 48px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);background:rgba(245,247,251,.85);border-bottom:1px solid var(--border);transition:all .3s}
+    nav.scrolled{padding:10px 48px;box-shadow:var(--shadow)}
+    nav .nav-logo{font-size:15px;font-weight:900;letter-spacing:-.2px;display:flex;align-items:center;gap:8px}
+    .nav-links{display:flex;gap:28px;list-style:none}
+    .nav-links a{font-size:13px;font-weight:600;color:var(--text2);transition:color .2s;position:relative;padding-bottom:2px}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--accent);border-radius:2px;transform:scaleX(0);transition:transform .2s}
+    .nav-links a:hover{color:var(--accent)}
+    .nav-links a:hover::after{transform:scaleX(1)}
+    .nav-cta{font-size:12px;font-weight:700;background:var(--accent);color:#fff;padding:8px 18px;border-radius:50px;transition:all .25s}
+    .nav-cta:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(14,165,233,.28)}
+
+    .container{max-width:980px;margin:0 auto;padding:0 40px}
+    section{padding:64px 0}
+
+    .section-label{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:6px}
+    .section-title{font-size:24px;font-weight:900;letter-spacing:-.5px;margin-bottom:28px;color:var(--text)}
+
+    /* ── HERO ── */
+    .hero{padding:118px 0 72px;position:relative;overflow:hidden;display:flex;align-items:center}
+    .hero::before{content:'';position:absolute;top:-250px;right:-100px;width:800px;height:800px;background:radial-gradient(circle,rgba(14,165,233,.08) 0%,transparent 65%);pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(74,222,128,.05) 0%,transparent 65%);pointer-events:none}
+    .hero-inner{max-width:620px;margin:0 auto;text-align:center;position:relative;z-index:1}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:50px;background:var(--accent-light);border:1px solid rgba(14,165,233,.15);font-size:11px;font-weight:700;color:var(--accent-dark);margin-bottom:18px;animation:fadeDown .5s ease both}
+    .hero-badge span{width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;animation:pulse 2s ease infinite}
+    .hero h1{font-size:42px;font-weight:950;line-height:1.12;letter-spacing:-1.5px;margin-bottom:14px;animation:fadeDown .5s .08s ease both}
+    .hero h1 .line1{color:var(--text)}
+    .hero h1 .line2{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-subtitle{font-size:16px;font-weight:700;color:var(--text2);letter-spacing:.3px;margin-bottom:20px;animation:fadeDown .5s .16s ease both}
+    .hero-tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-bottom:28px;animation:fadeDown .5s .22s ease both}
+    .tag{padding:5px 13px;border-radius:50px;background:var(--surface);border:1px solid var(--border);font-size:12px;font-weight:600;color:var(--text2);transition:all .2s;cursor:default}
+    .tag:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
+    .hero-buttons{display:flex;gap:10px;justify-content:center;margin-bottom:32px;animation:fadeDown .5s .28s ease both}
+    .btn{padding:11px 24px;border-radius:50px;font-size:13px;font-weight:700;transition:all .25s;display:inline-flex;align-items:center;gap:6px}
+    .btn-primary{background:var(--accent);color:#fff;border:none;box-shadow:0 2px 8px rgba(14,165,233,.2)}
+    .btn-primary:hover{background:var(--accent-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(14,165,233,.3)}
+    .btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text2)}
+    .btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+    .hero-stats{display:flex;gap:0;justify-content:center;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--surface);box-shadow:var(--shadow);animation:fadeDown .5s .34s ease both;width:fit-content;margin:0 auto}
+    .stat-item{flex:1;padding:14px 24px;text-align:center;border-right:1px solid var(--border)}
+    .stat-item:last-child{border-right:none}
+    .stat-num{font-size:26px;font-weight:950;letter-spacing:-1.5px;color:var(--text);line-height:1;white-space:nowrap}
+    .stat-label{font-size:10px;color:var(--muted);margin-top:3px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+
+    /* ── ABOUT ── */
+    #about{background:var(--surface)}
+    .about-wrap{display:grid;grid-template-columns:140px 1fr;gap:44px;align-items:start}
+    .about-avatar{width:140px;height:140px;border-radius:20px;background:linear-gradient(135deg,#dbeafe,#c7d2fe,#ede9fe);display:flex;align-items:center;justify-content:center;font-size:56px;box-shadow:0 4px 20px rgba(14,165,233,.1);position:relative}
+    .about-avatar::after{content:'';position:absolute;inset:-4px;border-radius:24px;background:linear-gradient(135deg,rgba(14,165,233,.15),rgba(124,58,237,.1));z-index:-1;animation:rotateGrad 10s ease infinite;background-size:200% 200%}
+    .about-text p{font-size:14px;color:var(--text2);margin-bottom:10px;line-height:1.9}
+    .about-highlights{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+    .hl-item{display:flex;align-items:center;gap:7px;padding:7px 13px;background:var(--bg);border:1px solid var(--border);border-radius:9px;font-size:12px;font-weight:600;color:var(--text);transition:all .2s;cursor:default}
+    .hl-item:hover{border-color:var(--accent);background:var(--accent-light);color:var(--accent-dark)}
+    .hl-icon{font-size:14px}
+
+    /* ── ROADMAP ── */
+    .roadmap-intro{background:linear-gradient(135deg,rgba(14,165,233,.04),rgba(74,222,128,.03));border:1px solid rgba(14,165,233,.1);border-radius:var(--radius);padding:18px 22px;margin-bottom:20px}
+    .roadmap-intro h3{font-size:13px;font-weight:800;margin-bottom:6px}
+    .roadmap-intro p{color:var(--text2);font-size:13px;line-height:1.85}
+    .roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .roadmap-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;border-left:3px solid transparent;transition:all .25s;box-shadow:var(--shadow-md)}
+    .roadmap-card:hover{border-left-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+    .roadmap-card .step{font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--accent);margin-bottom:8px;text-transform:uppercase}
+    .roadmap-card h4{font-size:13px;font-weight:800;margin-bottom:10px}
+    .roadmap-card ul{list-style:none;font-size:12px;color:var(--text2)}
+    .roadmap-card ul li{padding:3px 0;padding-left:12px;position:relative}
+    .roadmap-card ul li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:10px;top:5px;font-weight:700}
+
+    /* ── SKILLS ── */
+    #skills{background:var(--bg)}
+    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .skill-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 16px;transition:all .3s;box-shadow:var(--shadow-md);cursor:default}
+    .skill-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover);border-color:rgba(14,165,233,.2)}
+    .skill-top{display:flex;align-items:center;margin-bottom:8px;gap:10px}
+    .skill-icon{width:32px;height:32px;border-radius:8px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+    .skill-name{font-size:13px;font-weight:800;flex:1}
+    .skill-desc{font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5}
+    .skill-bar-wrap{display:flex;align-items:center;gap:8px}
+    .skill-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;flex:1}
+    .skill-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent-dark),var(--accent));width:0;transition:width 1s cubic-bezier(.4,0,.2,1)}
+    .skill-pct{font-size:10px;font-weight:700;color:var(--muted);flex-shrink:0;width:26px;text-align:right}
+
+    /* ── PROJECTS ── */
+    #projects{background:var(--surface)}
+    .projects-filter{display:flex;gap:7px;margin-bottom:18px}
+    .filter-btn{padding:6px 14px;border-radius:50px;background:var(--bg);border:1px solid var(--border);font-size:12px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .2s}
+    .filter-btn:hover,.filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .project-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .3s;box-shadow:var(--shadow-md);display:flex;flex-direction:column}
+    .project-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:rgba(14,165,233,.2)}
+    .project-thumb{height:148px;border-radius:0;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden}
+    .thumb-ticket{background:linear-gradient(160deg,#bfdbfe,#dbeafe,#d1fae5)}
+    .thumb-annot{background:linear-gradient(160deg,#ddd6fe,#ede9fe,#ddd6fe)}
+    .thumb-churn{background:linear-gradient(160deg,#fde68a,#fce7f3,#bfdbfe)}
+    .thumb-sales{background:linear-gradient(160deg,#d1fae5,#bfdbfe,#e0e7ff)}
+    .thumb-fallback{background:linear-gradient(160deg,#bae6fd,#e0f2fe)}
+    .project-badge{position:absolute;top:10px;left:10px;padding:3px 8px;border-radius:50px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;backdrop-filter:blur(8px)}
+    .badge-external{background:rgba(14,165,233,.15);color:var(--accent-dark);border:1px solid rgba(14,165,233,.2)}
+    .badge-local{background:rgba(74,222,128,.15);color:var(--green);border:1px solid rgba(74,222,128,.2)}
+    .project-link-icon{position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;font-size:11px;opacity:0;transform:scale(.6);transition:all .25s}
+    .project-card:hover .project-link-icon{opacity:1;transform:scale(1)}
+    .project-body{padding:16px;flex:1;display:flex;flex-direction:column}
+    .project-title{font-size:14px;font-weight:800;margin-bottom:5px}
+    .project-desc{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.65;flex:1}
+    .project-metrics{display:flex;gap:4px;margin-bottom:9px;flex-wrap:wrap}
+    .metric{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:50px;background:rgba(14,165,233,.07);border:1px solid rgba(14,165,233,.1);font-size:10px;font-weight:700;color:var(--accent-dark)}
+    .metric.green{background:var(--green-light);border-color:rgba(74,222,128,.15);color:var(--green)}
+    .project-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+    .ptag{padding:2px 7px;border-radius:50px;background:var(--bg);border:1px solid var(--border);font-size:10px;color:var(--text2);font-weight:600}
+    .project-footer{display:flex;align-items:center;justify-content:flex-end;margin-top:auto;padding-top:10px;border-top:1px solid var(--border)}
+    .proj-link{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;transition:gap .2s}
+    .proj-link.external{color:var(--accent)}
+    .proj-link.local{color:var(--green)}
+    .proj-link:hover{gap:8px}
+
+    /* ── BLOGS ── */
+    #blogs{background:var(--bg)}
+    .blogs-list{display:flex;flex-direction:column;gap:10px}
+    .blog-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;transition:all .25s;display:block;box-shadow:var(--shadow-md);border-left:3px solid var(--border)}
+    .blog-item:hover{border-left-color:var(--accent);transform:translateX(3px);box-shadow:var(--shadow-hover)}
+    .blog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;gap:12px}
+    .blog-title{font-size:14px;font-weight:800;color:var(--text);line-height:1.4;flex:1}
+    .blog-arrow{color:var(--accent);font-size:15px;flex-shrink:0;transition:transform .2s}
+    .blog-item:hover .blog-arrow{transform:translateX(3px)}
+    .blog-meta{display:flex;gap:12px;font-size:11px;color:var(--muted);margin-bottom:5px;font-weight:600}
+    .blog-desc{font-size:13px;color:var(--text2);line-height:1.75}
+
+    /* ── CONTACT ── */
+    #contact{background:var(--surface)}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+    .contact-info p{font-size:14px;color:var(--text2);line-height:1.9;margin-bottom:18px}
+    .contact-links{display:flex;flex-direction:column;gap:7px}
+    .contact-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;font-size:13px;font-weight:600;transition:all .2s}
+    .contact-item:hover{border-color:var(--accent);transform:translateX(3px);background:var(--accent-light)}
+    .ci-icon{font-size:15px}
+    .contact-form-wrap{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-md)}
+    :deep(.el-form-item__label){font-weight:700;font-size:12px;color:var(--text)}
+    :deep(.el-input__wrapper){border-radius:9px!important;box-shadow:none!important;border:1.5px solid var(--border)!important;transition:border-color .2s,box-shadow .2s!important}
+    :deep(.el-input__wrapper:hover){border-color:var(--accent)!important}
+    :deep(.el-input__wrapper.is-focus){border-color:var(--accent)!important;box-shadow:0 0 0 2px rgba(14,165,233,.07)!important}
+    :deep(.el-textarea__inner){border-radius:9px!important;border:1.5px solid var(--border)!important;box-shadow:none!important;font-family:inherit;transition:border-color .2s,box-shadow .2s!important}
+    :deep(.el-textarea__inner:focus){border-color:var(--accent)!important;box-shadow:0 0 0 2px rgba(14,165,233,.07)!important}
+    :deep(.el-form-item){margin-bottom:14px}
+    :deep(.el-form-item:last-child){margin-bottom:0}
+
+    /* ── FOOTER ── */
+    footer{background:var(--text);padding:36px 0;text-align:center}
+    footer .footer-logo{font-size:16px;font-weight:900;color:#fff;margin-bottom:3px;letter-spacing:-.3px}
+    footer .footer-title{font-size:11px;color:rgba(255,255,255,.3);margin-bottom:14px;font-weight:600}
+    footer p{font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.3px}
+    .socials{display:flex;justify-content:center;gap:14px;margin-bottom:12px}
+    .socials a{font-size:18px;transition:transform .2s;display:block;color:rgba(255,255,255,.4)}
+    .socials a:hover{transform:translateY(-2px)}
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+    @keyframes rotateGrad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:768px){
+      .about-wrap{grid-template-columns:1fr;text-align:center}
+      .about-avatar{margin:0 auto}
+      .about-highlights{justify-content:center}
+      .skills-grid{grid-template-columns:repeat(2,1fr)}
+      .roadmap-grid{grid-template-columns:1fr}
+      .projects-grid{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      .hero-stats{width:100%;max-width:400px}
+      nav{padding:12px 24px}
+      .container{padding:0 20px}
+      section{padding:48px 0}
+      .hero h1{font-size:34px}
+      .section-title{font-size:20px}
+    }
+    @media(max-width:480px){
+      .hero h1{font-size:28px}
+      .hero-stats{flex-direction:column;width:100%}
+      .stat-item{border-right:none;border-bottom:1px solid var(--border);padding:10px 20px}
+      .stat-item:last-child{border-bottom:none}
+      .skills-grid{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">🎯 涂炎钊</div>
+    <ul class="nav-links">
+      <li><a href="#about">关于</a></li>
+      <li><a href="#skills">技能</a></li>
+      <li><a href="#projects">项目</a></li>
+      <li><a href="#blogs">博客</a></li>
+      <li><a href="#contact">联系</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">📬 聊聊</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-badge"><span></span>数据分析师 · 转型 AI 应用</div>
+        <h1>
+          <span class="line1">用数据驱动决策</span><br>
+          <span class="line2">用 AI 创造价值</span>
+        </h1>
+        <p class="hero-subtitle">数据分析 × AI 应用实践</p>
+        <div class="hero-tags">
+          
+          <span class="tag">Python</span>
+          
+          <span class="tag">SQL</span>
+          
+          <span class="tag">LLM</span>
+          
+          <span class="tag">RAG</span>
+          
+          <span class="tag">AI Agent</span>
+          
+          <span class="tag">数据可视化</span>
+          
+        </div>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">看项目 →</a>
+          <a href="#blogs" class="btn btn-outline">读文章</a>
+        </div>
+        <div class="hero-stats">
+          
+          <div class="stat-item">
+            <div class="stat-num">5年</div>
+            <div class="stat-label">数据领域</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-num">AI+</div>
+            <div class="stat-label">转型进行中</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">持续学习中</div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">关于我</div>
+        <h2 class="section-title">一些背景</h2>
+      </div>
+      <div class="about-wrap reveal">
+        <div class="about-avatar">🎯</div>
+        <div class="about-text">
+          
+          
+          <p>涂炎钊（Troy），深圳，本科毕业。
+5年数据领域经验：曾从事运维工程与大数据开发，现专注数据分析与业务洞察。
+擅长大数据处理（Spark/Hive）、SQL建模、机器学习与数据可视化。
+2025年起系统学习大模型应用：Prompt工程、RAG检索、AI Agent设计。
+记录从数据分析出发，向 AI 应用探索的转型之路。</p>
+          
+          
+          <div class="about-highlights">
+            
+            <div class="hl-item">
+              <div class="hl-icon">📊</div>
+              <span>数据分析</span>
+            </div>
+            
+            <div class="hl-item">
+              <div class="hl-icon">🧮</div>
+              <span>大数据处理</span>
+            </div>
+            
+            <div class="hl-item">
+              <div class="hl-icon">🤖</div>
+              <span>AI 应用</span>
+            </div>
+            
+            <div class="hl-item">
+              <div class="hl-icon">📝</div>
+              <span>技术沉淀</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="transition">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">成长路径</div>
+        <h2 class="section-title">从数据到 AI</h2>
+      </div>
+      <div class="roadmap-intro reveal">
+        <h3>🎯 为什么关注 AI？</h3>
+        <p>AI 正在改变数据的玩法。不只是描述过去，而是能预测未来、生成洞见。记录从传统数据分析出发，向 LLM 应用、AI Agent 探索的过程。</p>
+      </div>
+      <div class="roadmap-grid">
+        
+        <div class="roadmap-card reveal">
+          <div class="step">基础 ✅</div>
+          <h4>数据能力</h4>
+          <ul>
+            
+            <li>Python / SQL</li>
+            
+            <li>大数据处理 Spark/Hive</li>
+            
+            <li>数据可视化</li>
+            
+            <li>业务洞察</li>
+            
+          </ul>
+        </div>
+        
+        <div class="roadmap-card reveal">
+          <div class="step">进行中 🔥</div>
+          <h4>AI 技能</h4>
+          <ul>
+            
+            <li>Prompt 工程</li>
+            
+            <li>RAG 检索</li>
+            
+            <li>AI Agent</li>
+            
+            <li>向量数据库</li>
+            
+          </ul>
+        </div>
+        
+        <div class="roadmap-card reveal">
+          <div class="step">计划中 🎯</div>
+          <h4>进阶方向</h4>
+          <ul>
+            
+            <li>模型微调</li>
+            
+            <li>MLOps</li>
+            
+            <li>产品落地</li>
+            
+            <li>技术输出</li>
+            
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">技能栈</div>
+        <h2 class="section-title">技术能力</h2>
+      </div>
+      <div class="skills-grid">
+        
+        <div class="skill-card reveal">
+          <div class="skill-top">
+            <div class="skill-icon">🐍</div>
+            <div class="skill-name">Python</div>
+          </div>
+          <div class="skill-desc">数据处理、NLP、脚本自动化</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+            <div class="skill-pct">92%</div>
+          </div>
+        </div>
+        
+        <div class="skill-card reveal">
+          <div class="skill-top">
+            <div class="skill-icon">🗃️</div>
+            <div class="skill-name">SQL</div>
+          </div>
+          <div class="skill-desc">复杂查询、性能优化、数据管道</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+            <div class="skill-pct">88%</div>
+          </div>
+        </div>
+        
+        <div class="skill-card reveal">
+          <div class="skill-top">
+            <div class="skill-icon">📈</div>
+            <div class="skill-name">机器学习</div>
+          </div>
+          <div class="skill-desc">XGBoost、Sklearn、特征工程</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+            <div class="skill-pct">80%</div>
+          </div>
+        </div>
+        
+        <div class="skill-card reveal">
+          <div class="skill-top">
+            <div class="skill-icon">🤖</div>
+            <div class="skill-name">AI / LLM</div>
+          </div>
+          <div class="skill-desc">RAG、Agent、Prompt工程</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+            <div class="skill-pct">75%</div>
+          </div>
+        </div>
+        
+        <div class="skill-card reveal">
+          <div class="skill-top">
+            <div class="skill-icon">📊</div>
+            <div class="skill-name">数据可视化</div>
+          </div>
+          <div class="skill-desc">Tableau、Plotly、数据故事</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+            <div class="skill-pct">85%</div>
+          </div>
+        </div>
+        
+        <div class="skill-card reveal">
+          <div class="skill-top">
+            <div class="skill-icon">🧠</div>
+            <div class="skill-name">AI Agent</div>
+          </div>
+          <div class="skill-desc">工作流设计、工具调用、AutoGPT</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar"><div class="skill-fill" data-width="68"></div></div>
+            <div class="skill-pct">68%</div>
+          </div>
+        </div>
+        
+        <div class="skill-card reveal">
+          <div class="skill-top">
+            <div class="skill-icon">☁️</div>
+            <div class="skill-name">云平台</div>
+          </div>
+          <div class="skill-desc">FastAPI、Docker、AWS/阿里云</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+            <div class="skill-pct">70%</div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">项目作品</div>
+        <h2 class="section-title">实践案例</h2>
+      </div>
+      <div class="projects-filter reveal">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="external">🌐 外部项目</button>
+        <button class="filter-btn" data-filter="local">📝 详细案例</button>
+      </div>
+      <div class="projects-grid" id="projects-grid">
+        
+        
+        
+        
+        
+        
+        <div class="project-card reveal" data-type="local">
+          <div class="project-thumb thumb-ticket">
+            <span class="project-badge badge-local">
+              详细案例
+            </span>
+            🤖
+            
+            <a href="static/projects/ticket-classifier.html" class="project-link-icon" title="查看">→</a>
+            
+          </div>
+          <div class="project-body">
+            <div class="project-title">客服工单智能分类助手</div>
+            <div class="project-desc">基于 LLM + RAG 构建客服工单分类与回复推荐系统，日均处理工单1200+，分类准确率91%。点击查看完整技术方案。</div>
+            <div class="project-metrics">
+              
+              <span class="metric green">日均 1200+ 工单</span>
+              
+              <span class="metric ">准确率 91%</span>
+              
+              <span class="metric ">响应效率提升 40%</span>
+              
+            </div>
+            <div class="project-tags">
+              
+              <span class="ptag">LLM</span>
+              
+              <span class="ptag">RAG</span>
+              
+              <span class="ptag">LangChain</span>
+              
+              <span class="ptag">FastAPI</span>
+              
+            </div>
+            <div class="project-footer">
+              
+              <a href="static/projects/ticket-classifier.html" class="proj-link local">查看详情 →</a>
+              
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        <div class="project-card reveal" data-type="local">
+          <div class="project-thumb thumb-annot">
+            <span class="project-badge badge-local">
+              详细案例
+            </span>
+            🛠️
+            
+            <a href="static/projects/annotation-platform.html" class="project-link-icon" title="查看">→</a>
+            
+          </div>
+          <div class="project-body">
+            <div class="project-title">数据标注平台</div>
+            <div class="project-desc">FastAPI + Vue3 搭建的内部标注平台，支持6种任务类型，日均标注量5000+，标注效率提升35%。点击查看架构设计。</div>
+            <div class="project-metrics">
+              
+              <span class="metric green">6 种任务类型</span>
+              
+              <span class="metric ">日均 5000+ 标注量</span>
+              
+              <span class="metric ">效率提升 35%</span>
+              
+            </div>
+            <div class="project-tags">
+              
+              <span class="ptag">FastAPI</span>
+              
+              <span class="ptag">Vue3</span>
+              
+              <span class="ptag">PostgreSQL</span>
+              
+              <span class="ptag">Docker</span>
+              
+            </div>
+            <div class="project-footer">
+              
+              <a href="static/projects/annotation-platform.html" class="proj-link local">查看详情 →</a>
+              
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        <div class="project-card reveal" data-type="local">
+          <div class="project-thumb thumb-churn">
+            <span class="project-badge badge-local">
+              详细案例
+            </span>
+            📊
+            
+            <a href="static/projects/churn-prediction.html" class="project-link-icon" title="查看">→</a>
+            
+          </div>
+          <div class="project-body">
+            <div class="project-title">电商用户流失预测系统</div>
+            <div class="project-desc">基于 XGBoost 构建用户流失预警模型，提前14天预测潜在流失用户，准确率83%，落地后留存提升12%。</div>
+            <div class="project-metrics">
+              
+              <span class="metric green">准确率 83%</span>
+              
+              <span class="metric ">留存提升 12%</span>
+              
+              <span class="metric ">提前14天预警</span>
+              
+            </div>
+            <div class="project-tags">
+              
+              <span class="ptag">Python</span>
+              
+              <span class="ptag">XGBoost</span>
+              
+              <span class="ptag">SQL</span>
+              
+              <span class="ptag">机器学习</span>
+              
+            </div>
+            <div class="project-footer">
+              
+              <a href="static/projects/churn-prediction.html" class="proj-link local">查看详情 →</a>
+              
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        <div class="project-card reveal" data-type="local">
+          <div class="project-thumb thumb-sales">
+            <span class="project-badge badge-local">
+              详细案例
+            </span>
+            📈
+            
+            <a href="static/projects/sales-dashboard.html" class="project-link-icon" title="查看">→</a>
+            
+          </div>
+          <div class="project-body">
+            <div class="project-title">销售数据分析看板</div>
+            <div class="project-desc">Tableau 构建集团级销售看板，打通5个业务数据源，日均自动刷新，管理层日活40+用户。</div>
+            <div class="project-metrics">
+              
+              <span class="metric green">5 个数据源打通</span>
+              
+              <span class="metric ">日活 40+ 用户</span>
+              
+              <span class="metric ">日自动刷新</span>
+              
+            </div>
+            <div class="project-tags">
+              
+              <span class="ptag">Tableau</span>
+              
+              <span class="ptag">SQL</span>
+              
+              <span class="ptag">ETL</span>
+              
+              <span class="ptag">数据可视化</span>
+              
+            </div>
+            <div class="project-footer">
+              
+              <a href="static/projects/sales-dashboard.html" class="proj-link local">查看详情 →</a>
+              
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        <div class="project-card reveal" data-type="local">
+          <div class="project-thumb thumb-fallback">
+            <span class="project-badge badge-local">
+              详细案例
+            </span>
+            🏗️
+            
+            <a href="static/projects/data-warehouse.html" class="project-link-icon" title="查看">→</a>
+            
+          </div>
+          <div class="project-body">
+            <div class="project-title">电商数据仓库建设</div>
+            <div class="project-desc">基于 Hadoop 生态搭建离线数仓，覆盖用户、商品、订单三大主题域，日处理数据量千万级，为上层数据分析与算法模型提供统一数据底座。</div>
+            <div class="project-metrics">
+              
+              <span class="metric green">千万级日处理量</span>
+              
+              <span class="metric ">3 大主题域</span>
+              
+              <span class="metric ">数据时效 T+1</span>
+              
+            </div>
+            <div class="project-tags">
+              
+              <span class="ptag">Hadoop</span>
+              
+              <span class="ptag">Hive</span>
+              
+              <span class="ptag">Spark</span>
+              
+              <span class="ptag">Sqoop</span>
+              
+              <span class="ptag">Kafka</span>
+              
+              <span class="ptag">Azkaban</span>
+              
+            </div>
+            <div class="project-footer">
+              
+              <a href="static/projects/data-warehouse.html" class="proj-link local">查看详情 →</a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOGS -->
+  <section id="blogs">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">技术博客</div>
+        <h2 class="section-title">最近文章</h2>
+      </div>
+      <div class="blogs-list">
+        
+        <a href="#" class="blog-item reveal">
+          <div class="blog-top">
+            <div class="blog-title">用 Python 脚本自动化日常数据报表的全流程</div>
+            <div class="blog-arrow">→</div>
+          </div>
+          <div class="blog-meta"><span>2026-03-15</span><span>5 min read read</span></div>
+          <div class="blog-desc">从数据抽取、清洗、到邮件自动发送，手把手搭建一套零人工干预的报表流水线。</div>
+        </a>
+        
+        <a href="#" class="blog-item reveal">
+          <div class="blog-top">
+            <div class="blog-title">RAG 实战：从 0 到 1 搭建客服知识库问答系统</div>
+            <div class="blog-arrow">→</div>
+          </div>
+          <div class="blog-meta"><span>2026-02-28</span><span>8 min read read</span></div>
+          <div class="blog-desc">基于 LangChain + ChatGLM3，完整记录 RAG 系统的搭建思路、向量检索优化和 Prompt 调优经验。</div>
+        </a>
+        
+        <a href="#" class="blog-item reveal">
+          <div class="blog-top">
+            <div class="blog-title">用户分群怎么做？K-Means + RFM 实战笔记</div>
+            <div class="blog-arrow">→</div>
+          </div>
+          <div class="blog-meta"><span>2026-01-20</span><span>6 min read read</span></div>
+          <div class="blog-desc">用电商真实数据演示 RFM 模型 + K-Means 分群，找到高价值用户、流失风险用户和潜力用户。</div>
+        </a>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">联系方式</div>
+        <h2 class="section-title">交流 / 合作</h2>
+      </div>
+      <div class="contact-grid reveal">
+        <div class="contact-info">
+          <p>数据分析、AI 应用、技术交流都可以找我。也欢迎各种合作机会。</p>
+          <div class="contact-links">
+            <a href="mailto:yanzhao.tu@email.com" class="contact-item">
+              <div class="ci-icon">✉️</div><span>yanzhao.tu@email.com</span>
+            </a>
+            <a href="#" class="contact-item">
+              <div class="ci-icon">💬</div><span>WeChat: yan_zhao_tu</span>
+            </a>
+          </div>
+        </div>
+        <div class="contact-form-wrap">
+          <div id="app"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">🎯 涂炎钊</div>
+    <div class="footer-title">数据分析师转型AI应用者</div>
+    <div class="socials">
+      <a href="" title="GitHub">🐙</a>
+    </div>
+    <p>© 2026</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/element-plus@2.5.0/dist/index.full.min.js"></script>
+  <script>
+    const {createApp, ref, reactive} = Vue;
+    const {ElMessage, ElForm, ElFormItem, ElInput, ElButton, ElResult} = ElementPlus;
+
+    const App = {
+      components: {ElForm, ElFormItem, ElInput, ElButton, ElResult},
+      setup() {
+        const form = reactive({email: '', message: ''});
+        const formRef = ref(null);
+        const submitting = ref(false);
+        const submitSuccess = ref(false);
+        const validateEmail = (rule, value, callback) => {
+          if (!value) callback(new Error('请输入邮箱'));
+          else if (!/^[^@]+@[^@]+\.[^@]+$/.test(value)) callback(new Error('请输入有效邮箱'));
+          else callback();
+        };
+        const rules = {
+          email: [{validator: validateEmail, trigger: 'blur'}],
+          message: [
+            {required: true, message: '请输入想说的话', trigger: 'blur'},
+            {min: 5, message: '至少5个字符', trigger: 'blur'}
+          ]
+        };
+        const submitForm = async () => {
+          if (!formRef.value) return;
+          try {
+            await formRef.value.validate();
+            submitting.value = true;
+            const fd = new FormData();
+            fd.append('email', form.email);
+            fd.append('message', form.message);
+            const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {method: 'POST', body: fd});
+            if (res.ok) {submitSuccess.value = true; form.email = ''; form.message = ''}
+            else ElMessage.error('发送失败，请重试');
+          } catch (e) {ElMessage.error('请检查表单填写是否正确');}
+          finally {submitting.value = false;}
+        };
+        return {form, rules, formRef, submitting, submitSuccess, submitForm};
+      },
+      template: `
+        <el-form ref="formRef" :model="form" :rules="rules" label-position="top" v-if="!submitSuccess">
+          <el-form-item label="邮箱" prop="email">
+            <el-input v-model="form.email" placeholder="you@email.com" size="large" />
+          </el-form-item>
+          <el-form-item label="留言" prop="message">
+            <el-input v-model="form.message" type="textarea" :rows="4" placeholder="想说点什么..." resize="none" />
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" size="large" :loading="submitting" @click="submitForm" style="border-radius:50px;padding:11px 24px;font-weight:700;">
+              发送 →
+            </el-button>
+          </el-form-item>
+        </el-form>
+        <el-result v-else icon="success" title="已发送" sub-title="感谢留言，我会尽快回复">
+          <template #extra>
+            <el-button type="primary" @click="submitSuccess=false" style="border-radius:50px;">再发一条</el-button>
+          </template>
+        </el-result>
+      `
+    };
+    createApp(App).use(ElementPlus).mount('#app');
+
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          const f = e.target.querySelector('.skill-fill');
+          if (f) f.style.width = f.dataset.width + '%';
+        }
+      });
+    }, {threshold: .05});
+    reveals.forEach(el => io.observe(el));
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.project-card').forEach(c => {
+          c.style.display = (f === 'all' || c.dataset.type === f) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
