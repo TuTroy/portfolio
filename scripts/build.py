@@ -67,6 +67,12 @@ def render_and_build():
 
         print(f"✅ 生成了 {proj_id}.html（两处）")
 
+    # 同步到仓库根目录（GitHub Pages 从根目录读取）
+    shutil.copy2(OUTPUT_DIR / "index.html", BASE_DIR / "index.html")
+    for proj_id in ["ticket-classifier", "annotation-platform"]:
+        shutil.copy2(OUTPUT_DIR / f"{proj_id}.html", BASE_DIR / f"{proj_id}.html")
+    print(f"✅ 同步到仓库根目录")
+
     print(f"\n📦 构建完成: {OUTPUT_DIR}")
     print(f"🚀 启动服务: cd {BASE_DIR} && python3 serve.py")
 
