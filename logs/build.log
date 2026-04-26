@@ -1,0 +1,6 @@
+✅ 生成了 index.html
+✅ 生成了 ticket-classifier.html（两处）
+✅ 生成了 annotation-platform.html（两处）
+
+📦 构建完成: /Users/troy_tu/.openclaw/workspace/portfolio/output
+🚀 启动服务: cd /Users/troy_tu/.openclaw/workspace/portfolio && python3 serve.py

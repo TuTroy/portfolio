@@ -1,33 +1,32 @@
 profile:
-  name: Troy
+  name: 涂炎钊
   title: 数据 / AI 实践者
-  badge: 数据分析师转型AI应用者
+  badge: 数据分析师 · 转型 AI 应用
   description: |
-    5年数据分析经验，专注 AI 大模型应用落地。
-    擅长大数据处理、机器学习、RAG 检索与 AI Agent 设计。
-    记录从数据分析师到 AI 应用者的探索与实践。
+    5年数据领域经验，深耕大数据处理与业务数据分析。
+    2025年起系统学习大模型应用：Prompt工程、RAG、AI Agent、向量数据库。
+    擅长大数据分析、机器学习建模与 AI 应用落地，致力于成为 AI 应用工程师。
   hero:
     title: 用数据驱动决策
     subtitle: 用 AI 创造价值
   stats:
-    - value: "3年+"
-      label: 数据分析
-    - value: 3个
-      label: AI 项目
-    - value: ∞
-      label: 持续探索
+    - value: "5年"
+      label: 数据领域
+    - value: AI+
+      label: 转型进行中
   about: |
-    涂炎钊（Troy），坐标深圳，数据分析师出身。
-    过去5年深耕电商/金融科技领域，擅长 Python、SQL、数据可视化与业务洞察。
-    2025年起系统学习大模型应用：Prompt工程、RAG、AI Agent、向量数据库。
-    这里是个人作品集，记录技术实践与成长思考。
+    涂炎钊（Troy），深圳，本科毕业。
+    5年数据领域经验：曾从事运维工程与大数据开发，现专注数据分析与业务洞察。
+    擅长大数据处理（Spark/Hive）、SQL建模、机器学习与数据可视化。
+    2025年起系统学习大模型应用：Prompt工程、RAG检索、AI Agent设计。
+    记录从数据分析出发，向 AI 应用探索的转型之路。
   highlights:
     - icon: 📊
       text: 数据分析
+    - icon: 🧮
+      text: 大数据处理
     - icon: 🤖
       text: AI 应用
-    - icon: 🔗
-      text: RAG / Agent
     - icon: 📝
       text: 技术沉淀
   roadmap:
@@ -35,8 +34,8 @@ profile:
       title: 数据能力
       points:
         - Python / SQL
+        - 大数据处理 Spark/Hive
         - 数据可视化
-        - 机器学习
         - 业务洞察
     - step: 进行中 🔥
       title: AI 技能
@@ -44,7 +43,7 @@ profile:
         - Prompt 工程
         - RAG 检索
         - AI Agent
-        - LangChain
+        - 向量数据库
     - step: 计划中 🎯
       title: 进阶方向
       points:
@@ -53,7 +52,7 @@ profile:
         - 产品落地
         - 技术输出
   contact:
-    email: 113****258@qq.com
-    wechat: yan***_tu
+    email: yanzhao.tu@email.com
+    wechat: yan_zhao_tu
     github: ""
   formspree_id: YOUR_FORM_ID

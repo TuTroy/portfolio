@@ -1,0 +1,21 @@
+INFO: Portfolio serving /Users/troy_tu/.openclaw/workspace/portfolio/output on http://localhost:8080
+127.0.0.1 - - [26/Apr/2026 12:50:13] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [26/Apr/2026 12:50:23] "GET /static/projects/ticket-classifier.html HTTP/1.1" 200 -
+127.0.0.1 - - [26/Apr/2026 12:50:25] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [26/Apr/2026 12:50:28] code 404, message File not found
+127.0.0.1 - - [26/Apr/2026 12:50:28] "GET /static/projects/data-warehouse.html HTTP/1.1" 404 -
+127.0.0.1 - - [26/Apr/2026 12:50:31] code 404, message File not found
+127.0.0.1 - - [26/Apr/2026 12:50:31] "GET /static/projects/sales-dashboard.html HTTP/1.1" 404 -
+127.0.0.1 - - [26/Apr/2026 12:50:33] code 404, message File not found
+127.0.0.1 - - [26/Apr/2026 12:50:33] "GET /static/projects/churn-prediction.html HTTP/1.1" 404 -
+127.0.0.1 - - [26/Apr/2026 12:58:04] "GET /static/projects/data-warehouse.html HTTP/1.1" 200 -
+127.0.0.1 - - [26/Apr/2026 12:58:04] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [26/Apr/2026 12:58:17] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [26/Apr/2026 12:58:48] "GET /static/projects/data-warehouse.html HTTP/1.1" 200 -
+127.0.0.1 - - [26/Apr/2026 13:06:15] code 404, message File not found
+127.0.0.1 - - [26/Apr/2026 13:06:15] "GET /static/index.html HTTP/1.1" 404 -
+127.0.0.1 - - [26/Apr/2026 13:06:18] code 404, message File not found
+127.0.0.1 - - [26/Apr/2026 13:06:18] "GET /static/index.html HTTP/1.1" 404 -
+127.0.0.1 - - [26/Apr/2026 13:14:46] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [26/Apr/2026 14:43:13] "GET /index.html HTTP/1.1" 304 -
+127.0.0.1 - - [26/Apr/2026 15:38:49] "GET /index.html HTTP/1.1" 304 -
