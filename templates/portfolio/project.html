@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.title }} · {{ personal.name }}{% endblock %}
+
+{% block content %}
+<div class="project-detail-container">
+  <div class="project-header reveal">
+    <span class="project-badge badge-{{ project.type }}">
+      {% if project.type == 'external' %}外部项目{% else %}详细案例{% endif %}
+    </span>
+    <h1>{{ project.title }}</h1>
+    <div class="project-meta">
+      <span>{{ project.thumb }} {{ project.tags | join(' / ') }}</span>
+      <span>📅 {{ project.year }}</span>
+      <span>⏱️ {{ project.status }}</span>
+    </div>
+  </div>
+
+  <div class="content-block reveal">
+    <h2>项目概述</h2>
+    <p>{{ project.overview }}</p>
+  </div>
+
+  {% if project.architecture %}
+  <div class="content-block reveal">
+    <h2>技术架构</h2>
+    <ul>
+      {% for item in project.architecture %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if project.achievements %}
+  <div class="content-block reveal">
+    <h2>核心成果</h2>
+    <ul>
+      {% for item in project.achievements %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</div>
+
+<script>
+  // Project detail reveal animation (standalone page)
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    el.classList.add('visible');
+  });
+</script>
+{% endblock %}

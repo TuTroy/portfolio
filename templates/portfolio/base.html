@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ personal.site_title | default("Troy · 数据分析师转型AI应用者") }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ personal.site_description | default("") }}{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}Troy · 数据分析师转型AI应用者{% endblock %}">
+  <meta property="og:description" content="{% block og_desc %}{{ personal.site_description | default("") }}{% endblock %}">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0ea5e9">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+  <link rel="stylesheet" href="/static/css/portfolio.css">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  {% block nav %}
+  <nav id="navbar">
+    <div class="nav-logo">🎯 {{ personal.name }}</div>
+
+    {# Desktop nav links #}
+    <ul class="nav-links">
+      <li><a href="#about">关于</a></li>
+      <li><a href="#skills">技能</a></li>
+      <li><a href="#projects">项目</a></li>
+      <li><a href="#blogs">博客</a></li>
+      <li><a href="#contact">联系</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">📬 聊聊</a>
+
+    {# Hamburger (mobile) #}
+    <button class="hamburger" id="hamburger" aria-label="打开菜单" type="button">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  {# Mobile menu #}
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#about">关于</a>
+    <a href="#skills">技能</a>
+    <a href="#projects">项目</a>
+    <a href="#blogs">博客</a>
+    <a href="#contact">联系</a>
+  </div>
+  {% endblock %}
+
+  <main>{% block content %}{% endblock %}</main>
+
+  {% block footer %}
+  <footer>
+    <div class="footer-logo">🎯 {{ personal.name }}</div>
+    <div class="footer-title">数据分析师转型AI应用者</div>
+    <div class="socials">
+      {% if personal.github %}
+      <a href="{{ personal.github }}" target="_blank" rel="noopener" title="GitHub">🐙</a>
+      {% endif %}
+    </div>
+    <p>© 2026</p>
+  </footer>
+  {% endblock %}
+
+  <script src="/static/js/portfolio.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

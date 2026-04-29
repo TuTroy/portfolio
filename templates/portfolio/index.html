@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ── HERO ────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span></span>{{ personal.badge }}
+      </div>
+      <h1>
+        <span class="line1">{{ personal.hero_title }}</span><br>
+        <span class="line2">{{ personal.hero_subtitle }}</span>
+      </h1>
+      <p class="hero-subtitle">{{ personal.hero_subtitle2 }}</p>
+
+      <div class="hero-tags">
+        {% for tag in personal.hero_tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">看项目 →</a>
+        <a href="#blogs" class="btn btn-outline">读文章</a>
+      </div>
+
+      <div class="hero-stats">
+        {% for stat in personal.stats %}
+        <div class="stat-item">
+          <div class="stat-num">{{ stat.value }}</div>
+          <div class="stat-label">{{ stat.label }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ──────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">关于我</div>
+      <h2 class="section-title">一些背景</h2>
+    </div>
+    <div class="about-wrap reveal">
+      <div class="about-avatar">🎯</div>
+      <div class="about-text">
+        <p>{{ personal.about }}</p>
+        <div class="about-highlights">
+          {% for hl in personal.highlights %}
+          <div class="hl-item">
+            <div class="hl-icon">{{ hl.icon }}</div>
+            <span>{{ hl.text }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ROADMAP ─────────────────────────────────────────────────── -->
+<section id="transition">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">成长路径</div>
+      <h2 class="section-title">从数据到 AI</h2>
+    </div>
+    <div class="roadmap-intro reveal">
+      <h3>🎯 为什么关注 AI？</h3>
+      <p>{{ personal.roadmap_intro }}</p>
+    </div>
+    <div class="roadmap-grid">
+      {% for card in personal.roadmap %}
+      <div class="roadmap-card reveal">
+        <div class="step">{{ card.step }}</div>
+        <h4>{{ card.title }}</h4>
+        <ul>
+          {% for point in card.points %}
+          <li>{{ point }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ─────────────────────────────────────────────────── -->
+<section id="skills">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">技能栈</div>
+      <h2 class="section-title">技术能力</h2>
+    </div>
+    <div class="skills-grid">
+      {% for skill in skills %}
+      <div class="skill-card reveal">
+        <div class="skill-top">
+          <div class="skill-icon">{{ skill.icon }}</div>
+          <div class="skill-name">{{ skill.name }}</div>
+        </div>
+        <div class="skill-desc">{{ skill.desc }}</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar"><div class="skill-fill" data-width="{{ skill.pct }}"></div></div>
+          <div class="skill-pct">{{ skill.pct }}%</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ────────────────────────────────────────────────── -->
+<section id="projects">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">项目作品</div>
+      <h2 class="section-title">实践案例</h2>
+    </div>
+
+    <div class="projects-filter reveal">
+      <button class="filter-btn active" data-filter="all">全部</button>
+      <button class="filter-btn" data-filter="local">📝 详细案例</button>
+    </div>
+
+    <div class="projects-grid" id="projects-grid">
+      {% for project in projects %}
+      {% set thumb_class = 'thumb-fallback' %}
+      {% if project.id == 'ticket-classifier' %}{% set thumb_class = 'thumb-ticket' %}{% endif %}
+      {% if project.id == 'annotation-platform' %}{% set thumb_class = 'thumb-annot' %}{% endif %}
+      {% if project.id == 'churn-prediction' %}{% set thumb_class = 'thumb-churn' %}{% endif %}
+      {% if project.id == 'sales-dashboard' %}{% set thumb_class = 'thumb-sales' %}{% endif %}
+
+      <div class="project-card reveal" data-type="{{ project.type }}">
+        <div class="project-thumb {{ thumb_class }}">
+          <span class="project-badge badge-{{ project.type }}">
+            {% if project.type == 'external' %}外部项目{% else %}详细案例{% endif %}
+          </span>
+          {{ project.thumb }}
+          <a href="/projects/{{ project.id }}" class="project-link-icon" title="查看详情">→</a>
+        </div>
+        <div class="project-body">
+          <div class="project-title">{{ project.title }}</div>
+          <div class="project-desc">{{ project.desc }}</div>
+          <div class="project-metrics">
+            {% for m in project.metrics %}
+            <span class="metric {% if m.highlight %}green{% endif %}">{{ m.value }}</span>
+            {% endfor %}
+          </div>
+          <div class="project-tags">
+            {% for tag in project.tags %}
+            <span class="ptag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+          <div class="project-footer">
+            <a href="/projects/{{ project.id }}" class="proj-link {% if project.type == 'external' %}external{% else %}local{% endif %}">
+              查看详情 →
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ── BLOGS ──────────────────────────────────────────────────── -->
+<section id="blogs">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">技术博客</div>
+      <h2 class="section-title">最近文章</h2>
+    </div>
+    <div class="blogs-list">
+      {% for blog in blogs %}
+      <a href="#" class="blog-item reveal">
+        <div class="blog-top">
+          <div class="blog-title">{{ blog.title }}</div>
+          <div class="blog-arrow">→</div>
+        </div>
+        <div class="blog-meta">
+          <span>{{ blog.date }}</span>
+          <span>{{ blog.read_time }} read</span>
+        </div>
+        <div class="blog-desc">{{ blog.desc }}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ─────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">联系方式</div>
+      <h2 class="section-title">交流 / 合作</h2>
+    </div>
+    <div class="contact-grid reveal">
+
+      <div class="contact-info">
+        <p>{{ personal.contact_note }}</p>
+        <div class="contact-links">
+          <a href="mailto:{{ personal.email }}" class="contact-item">
+            <div class="ci-icon">✉️</div>
+            <span>{{ personal.email }}</span>
+          </a>
+          <div class="contact-item">
+            <div class="ci-icon">💬</div>
+            <span>WeChat: {{ personal.wechat }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        {# Form #}
+        <form id="contact-form" data-formspree="{{ personal.formspree_id | default('YOUR_FORM_ID') }}" novalidate>
+          <div class="form-field">
+            <label for="form-email">邮箱</label>
+            <input
+              type="email"
+              id="form-email"
+              name="email"
+              placeholder="you@email.com"
+              autocomplete="email"
+            >
+          </div>
+          <div class="form-field">
+            <label for="form-message">留言</label>
+            <textarea
+              id="form-message"
+              name="message"
+              rows="4"
+              placeholder="想说点什么…"
+            ></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="form-submit">
+            发送 →
+          </button>
+        </form>
+
+        {# Success state #}
+        <div class="form-success" id="form-success">
+          <div class="form-success-icon">✅</div>
+          <h3>已发送</h3>
+          <p>感谢留言，我会尽快回复</p>
+          <button type="button" id="form-success-reset">再发一条</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
