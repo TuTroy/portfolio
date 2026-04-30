@@ -18,6 +18,7 @@ BASE_DIR = Path(__file__).parent.parent
 TEMPLATES_DIR = settings.templates_dir
 OUTPUT_DIR = BASE_DIR / "output"
 STATIC_PROJ_DIR = OUTPUT_DIR / "static" / "projects"
+BLOGS_OUTPUT_DIR = OUTPUT_DIR / "blogs"
 
 
 def build():
@@ -27,6 +28,7 @@ def build():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUTPUT_DIR / "static").mkdir(parents=True, exist_ok=True)
     STATIC_PROJ_DIR.mkdir(parents=True, exist_ok=True)
+    BLOGS_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATES_DIR / "portfolio"), encoding="utf-8"),
@@ -46,7 +48,7 @@ def build():
     tmpl_proj = env.get_template("project.html")
     for proj in PROJECTS:
         slug = proj["id"]
-        html = tmpl_proj.render(project=proj, personal=personal)
+        html = tmpl_proj.render(project=proj, personal=personal, projects=PROJECTS)
 
         # output/static/projects/slug.html  (for /projects/slug routes)
         (STATIC_PROJ_DIR / f"{slug}.html").write_text(html, encoding="utf-8")
@@ -56,10 +58,23 @@ def build():
 
         print(f"✅  Generated {slug}.html (output/ and output/static/projects/)")
 
+    # ── Render blog detail pages ───────────────────────────────
+    tmpl_blog = env.get_template("blog.html")
+    for blog in BLOGS:
+        slug = blog["slug"]
+        html = tmpl_blog.render(blog=blog, personal=personal)
+
+        # output/blogs/slug.html
+        (BLOGS_OUTPUT_DIR / f"{slug}.html").write_text(html, encoding="utf-8")
+
+        print(f"✅  Generated blogs/{slug}.html")
+
     # ── Sync to repo root ───────────────────────────────────────
     shutil.copy2(OUTPUT_DIR / "index.html", BASE_DIR / "index.html")
     for proj in PROJECTS:
         shutil.copy2(OUTPUT_DIR / f"{proj['id']}.html", BASE_DIR / f"{proj['id']}.html")
+    for blog in BLOGS:
+        shutil.copy2(BLOGS_OUTPUT_DIR / f"{blog['slug']}.html", BASE_DIR / f"{blog['slug']}.html")
     print(f"✅  Synced to repo root")
 
     print(f"\n📦 Build complete: {OUTPUT_DIR}")

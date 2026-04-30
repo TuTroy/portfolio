@@ -164,3 +164,40 @@ projects:
       - 覆盖用户、商品、订单三大主题域
       - 日处理数据量千万级
       - 下游支持 10+ 数据分析需求
+
+  # === Multi-Agent 项目 ===
+  - id: multi-agent-research
+    type: local
+    title: Multi-Agent 研究助手
+    desc: 手写 Multi-Agent 协作系统，模拟研究团队分工（规划→搜索→写作），展示 AI Agent 设计原理与多 Agent 协作机制。
+    thumb: 🤖
+    metrics:
+      - value: 3 个 Agent 协作
+        highlight: true
+      - value: 零框架依赖
+        highlight: false
+      - value: 纯 Python 实现
+        highlight: false
+    tags:
+      - Python
+      - AI Agent
+      - Multi-Agent
+      - MiniMax-M2.7
+      - DuckDuckGo
+    status: 已完成
+    year: 2026
+    overview: |
+      用纯 Python 手写 Multi-Agent 协作系统，没有使用 CrewAI 等框架。
+      三个 Agent（规划师/搜索专家/写作师）分工协作，模拟真实研究团队的工作流程。
+    architecture:
+      - 规划 Agent（Planner）：调用 LLM 将研究主题拆解为多个搜索子任务
+      - 搜索 Agent（Researcher）：调用 DuckDuckGo 并行收集信息
+      - 写作 Agent（Writer）：调用 LLM 将搜索结果整理为结构化研究报告
+      - 协作调度（Crew）：串联三个 Agent，形成完整的研究流程
+      - 大模型：MiniMax-M2.7
+      - 搜索：DuckDuckGo（ddgs）
+    achievements:
+      - 深入理解 Agent = LLM + Tools + Loop 的核心原理
+      - 掌握多 Agent 协作架构设计
+      - 纯 Python 实现，零外部框架依赖
+      - 可作为 AI 应用工程师面试展示项目

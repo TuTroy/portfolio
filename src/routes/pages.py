@@ -59,11 +59,33 @@ async def project_detail(proj_id: str, request: Request) -> HTMLResponse:
     project = next((p for p in PROJECTS if p["id"] == proj_id), None)
     if not project:
         return HTMLResponse(content="<h1>Project not found</h1>", status_code=404)
+    # Related projects
+    related = [p for p in PROJECTS if p["id"] in project.get("related", [])]
     return tmpl.TemplateResponse(
         "project.html",
         {
             "request": request,
             "project": project,
             "personal": PERSONAL,
+            "projects": PROJECTS,
+            "related_projects": related,
+        },
+    )
+
+
+@router.get("/blogs/{slug}", response_class=HTMLResponse)
+async def blog_detail(slug: str, request: Request) -> HTMLResponse:
+    """Render a blog article detail page."""
+    tmpl = get_templates()
+    blog = next((b for b in BLOGS if b["slug"] == slug), None)
+    if not blog:
+        return HTMLResponse(content="<h1>Article not found</h1>", status_code=404)
+    return tmpl.TemplateResponse(
+        "blog.html",
+        {
+            "request": request,
+            "blog": blog,
+            "personal": PERSONAL,
+            "projects": PROJECTS,
         },
     )

@@ -20,7 +20,7 @@
           io.unobserve(e.target);
         });
       },
-      { threshold: 0.05 }
+      { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
     );
     revealEls.forEach((el) => io.observe(el));
   }
@@ -33,6 +33,30 @@
     }, { passive: true });
   }
 
+  /* ── Active nav link on scroll ────────────────────────────── */
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = ['about', 'skills', 'projects', 'blogs', 'contact'];
+  if (navLinks.length) {
+    const sectionEls = sections
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.id;
+          navLinks.forEach((link) => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        });
+      },
+      { threshold: 0.3, rootMargin: '-20% 0px -60% 0px' }
+    );
+
+    sectionEls.forEach((el) => sectionObserver.observe(el));
+  }
+
   /* ── Mobile nav toggle ────────────────────────────────────── */
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -41,7 +65,6 @@
       hamburger.classList.toggle('active');
       mobileMenu.classList.toggle('open');
     });
-    // Close on link click
     mobileMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('active');
@@ -50,22 +73,99 @@
     });
   }
 
-  /* ── Project filter ───────────────────────────────────────── */
+  /* ── Project filter with smooth transition ─────────────────── */
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
-  if (filterBtns.length) {
+  if (filterBtns.length && projectCards.length) {
     filterBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
         filterBtns.forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');
         const filter = btn.dataset.filter;
+
+        // First: fade out non-matching cards
         projectCards.forEach((card) => {
-          card.style.display =
-            filter === 'all' || card.dataset.type === filter ? '' : 'none';
+          const show = filter === 'all' || card.dataset.type === filter;
+          if (!show) {
+            card.classList.add('hidden-card');
+            card.classList.remove('visible-card');
+          }
+        });
+
+        // Then: fade in matching cards with stagger
+        const matching = Array.from(projectCards).filter(
+          (card) => filter === 'all' || card.dataset.type === filter
+        );
+        matching.forEach((card, i) => {
+          card.classList.remove('hidden-card');
+          setTimeout(() => {
+            card.classList.add('visible-card');
+          }, i * 60);
         });
       });
     });
   }
+
+  /* ── Full card click zone ──────────────────────────────────── */
+  document.querySelectorAll('.project-card[data-url]').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      const url = card.dataset.url;
+      if (url) window.location.href = url;
+    });
+    card.style.cursor = 'pointer';
+  });
+
+  /* ── Blog card click zone ───────────────────────────────────── */
+  document.querySelectorAll('.blog-item[data-url]').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      const url = card.dataset.url;
+      if (url) window.location.href = url;
+    });
+  });
+
+  /* ── Thumb carousel ─────────────────────────────────────────── */
+  document.querySelectorAll('.thumb-carousel').forEach((carousel) => {
+    const imagesAttr = carousel.dataset.images;
+    if (!imagesAttr) return;
+    const images = imagesAttr.split('');
+    let current = 0;
+
+    function showNext() {
+      const items = carousel.querySelectorAll('.carousel-item');
+      items.forEach((item, idx) => {
+        item.style.display = (idx === current) ? 'flex' : 'none';
+        item.style.alignItems = 'center';
+        item.style.justifyContent = 'center';
+      });
+    }
+
+    // Create carousel items
+    carousel.innerHTML = '';
+    images.forEach((img, idx) => {
+      const span = document.createElement('span');
+      span.className = 'carousel-item';
+      span.textContent = img;
+      span.style.display = 'none';
+      carousel.appendChild(span);
+    });
+    showNext();
+
+    let interval;
+    const card = carousel.closest('.project-card');
+    if (card) {
+      card.addEventListener('mouseenter', () => {
+        interval = setInterval(() => {
+          current = (current + 1) % images.length;
+          showNext();
+        }, 1200);
+      });
+      card.addEventListener('mouseleave', () => {
+        clearInterval(interval);
+        current = 0;
+        showNext();
+      });
+    }
+  });
 
   /* ── Contact form ─────────────────────────────────────────── */
   const contactForm = document.getElementById('contact-form');

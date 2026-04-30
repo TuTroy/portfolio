@@ -27,6 +27,7 @@ class ProjectDict(TypedDict):
     overview: str
     architecture: list[str]
     achievements: list[str]
+    related: list[str]
 
 
 class RoadMapCardDict(TypedDict):
@@ -36,10 +37,13 @@ class RoadMapCardDict(TypedDict):
 
 
 class BlogDict(TypedDict):
+    slug: str
+    type: str
     title: str
     date: str
     read_time: str
     desc: str
+    content: str
 
 
 # ─── Personal ────────────────────────────────────────────────────────────────
@@ -149,6 +153,7 @@ PROJECTS: list[ProjectDict] = [
             "分类准确率 91%",
             "客服响应效率提升 40%",
         ],
+        "related": ["annotation-platform", "churn-prediction"],
     },
     {
         "id": "annotation-platform",
@@ -179,6 +184,7 @@ PROJECTS: list[ProjectDict] = [
             "支持 6 种任务类型",
             "标注效率提升 35%",
         ],
+        "related": ["ticket-classifier", "multi-agent-research"],
     },
     {
         "id": "churn-prediction",
@@ -209,6 +215,7 @@ PROJECTS: list[ProjectDict] = [
             "留存率提升 12%",
             "预警提前量 14 天",
         ],
+        "related": ["sales-dashboard", "data-warehouse"],
     },
     {
         "id": "sales-dashboard",
@@ -238,6 +245,7 @@ PROJECTS: list[ProjectDict] = [
             "日活 40+ 管理层用户",
             "数据时效从 T+1 提升到 T0",
         ],
+        "related": ["churn-prediction", "data-warehouse"],
     },
     {
         "id": "data-warehouse",
@@ -269,6 +277,7 @@ PROJECTS: list[ProjectDict] = [
             "日处理数据量千万级",
             "下游支持 10+ 数据分析需求",
         ],
+        "related": ["sales-dashboard", "churn-prediction"],
     },
     {
         "id": "multi-agent-research",
@@ -302,6 +311,7 @@ PROJECTS: list[ProjectDict] = [
             "纯 Python 实现，零外部框架依赖",
             "可作为 AI 应用工程师面试展示项目",
         ],
+        "related": ["ticket-classifier", "annotation-platform"],
     },
 ]
 
@@ -309,21 +319,223 @@ PROJECTS: list[ProjectDict] = [
 
 BLOGS: list[BlogDict] = [
     {
+        "slug": "python-automation-report",
+        "type": "article",
         "title": "用 Python 脚本自动化日常数据报表的全流程",
         "date": "2026-03-15",
         "read_time": "5 min read",
         "desc": "从数据抽取、清洗、到邮件自动发送，手把手搭建一套零人工干预的报表流水线。",
+        "content": (
+            "在日常数据分析工作中，报表制作是最耗时又最没技术含量的工作之一。"
+            "每周固定时间要从数据库里导出数据、清洗、对齐Excel格式、发邮件——全流程手工操作，"
+            "不仅效率低，还容易出错。本篇文章记录我用 Python 实现全自动化报表流水线的完整过程。\n\n"
+            "## 一、整体架构\n\n"
+            "这套自动化报表系统分为四个模块：数据抽取（Extract）、数据清洗（Transform）、"
+            "数据加载（Load）、邮件发送（Send）。整个流程由 crontab 定时触发，零人工干预。\n\n"
+            "数据源方面，公司业务系统是 MySQL + PostgreSQL，我会用 SQLAlchemy 做 ORM 映射，"
+            "配合 Pandas 做批量读取。数据量大的情况下先在数据库里做预聚合，减少 Python 侧的内存压力。\n\n"
+            "## 二、数据抽取（E）\n\n"
+            "```python\n"
+            "from sqlalchemy import create_engine\n"
+            "import pandas as pd\n\n"
+            "def extract(query, params=None):\n"
+            "    engine = create_engine('mysql+pymysql://user:pass@host/db')\n"
+            "    with engine.connect() as conn:\n"
+            "        df = pd.read_sql(query, conn, params=params)\n"
+            "    return df\n"
+            "```\n\n"
+            "这里踩过一个坑：直接用 pd.read_sql 跑大查询时容易 OOM。后来改成在 SQL 里先做聚合，"
+            "只拉取结果集而不是原始明细数据，单次查询时间从 40s 降到 3s，内存占用减少 90%。\n\n"
+            "## 三、数据清洗（T）\n\n"
+            "清洗逻辑根据业务规则来，一般包括：去除重复行、处理缺失值、统一日期格式、"
+            "关联维表补全字段名等。用 Pandas 的链式操作可以写得非常干净：\n\n"
+            "```python\n"
+            "df = (df.drop_duplicates()\n"
+            "        .assign(date=lambda x: pd.to_datetime(x['date']))\n"
+            "        .merge(dim_product, on='product_id', how='left')\n"
+            "        .fillna(0)\n"
+            ")\n"
+            "```\n\n"
+            "## 四、数据加载（L）+ 邮件发送\n\n"
+            "数据导出用 xlsxwriter 写 Excel，保留原始格式和条件颜色。"
+            "邮件发送用 smtplib + email，报表作为附件定时推送：\n\n"
+            "```python\n"
+            "import smtplib\n"
+            "from email.mime.multipart import MIMEMultipart\n"
+            "from email.mime.base import MIMEBase\n"
+            "\n"
+            "def send_email(report_path, recipients):\n"
+            "    msg = MIMEMultipart()\n"
+            "    msg['Subject'] = f'日报 {date.today()}'\n"
+            "    msg['To'] = ', '.join(recipients)\n"
+            "    with open(report_path, 'rb') as f:\n"
+            "        part = MIMEBase('application', 'octet-stream')\n"
+            "        part.set_payload(f.read())\n"
+            "    # ... attach and send\n"
+            "```\n\n"
+            "## 五、定时任务配置\n\n"
+            "最后在服务器上配置 crontab，每天早上 9 点自动跑：\n\n"
+            "```\n"
+            "0 9 * * * /usr/bin/python3 /opt/scripts/daily_report.py >> /var/log/report.log 2>&1\n"
+            "```\n\n"
+            "上线三个月以来，报表送达准时率 100%，人工干预次数降为 0，"
+            "彻底解放了每周至少 2 小时的重复工作时间。\n\n"
+            "如果你也在做类似的事情，建议先画流程图，把每个环节的输入输出理清楚，"
+            "再动手写代码。磨刀不误砍柴工。"
+        ),
     },
     {
+        "slug": "rag-practice",
+        "type": "article",
         "title": "RAG 实战：从 0 到 1 搭建客服知识库问答系统",
         "date": "2026-02-28",
         "read_time": "8 min read",
         "desc": "基于 LangChain + ChatGLM3，完整记录 RAG 系统的搭建思路、向量检索优化和 Prompt 调优经验。",
+        "content": (
+            "RAG（Retrieval-Augmented Generation，检索增强生成）是这两年大模型应用最火的技术方向之一。"
+            "它的核心思想很简单：不让 LLM 只靠自身参数回答问题，而是先从外部知识库检索相关内容，"
+            "再把检索结果作为上下文交给 LLM 生成答案。这样做的好处是：答案更准确、可溯源、"
+            "且可以实时更新知识库而不需要重新训练模型。\n\n"
+            "## 一、业务场景\n\n"
+            "我做的这套客服知识库问答系统，服务于一家约 200 人客服团队。"
+            "历史累积的工单、FAQ、产品文档加起来超过 10 万条。"
+            "客服人员每次接电话要先翻知识库找答案，平均一次查询耗时 3-5 分钟，既慢又容易出错。\n\n"
+            "目标是：输入一个用户问题，系统自动从知识库里检索相关内容，"
+            "生成准确答案并推荐给客服。客服只需要确认或微调，可以把单次处理时间压到 1 分钟以内。\n\n"
+            "## 二、技术选型\n\n"
+            "- LLM：ChatGLM3-6B（本地部署，避免数据外流）\n"
+            "- 向量数据库：Chroma（轻量、易用，支持本地持久化）\n"
+            "- 框架：LangChain（方便串起 retrieval + generation 流程）\n"
+            "- Embedding：sentence-transformers（all-MiniLM-L6-v2，轻量且效果不错）\n\n"
+            "## 三、知识库构建\n\n"
+            "知识库构建分为三步：文档解析、文本分块（Chunking）、向量化。\n\n"
+            "文档解析用 pdfplumber 提取 PDF 内容，工单数据从 MySQL 导出后清洗成结构化文本。"
+            "分块策略是门学问——太大则上下文稀释，太小则语义不完整。"
+            "我最后用的是 512 token、 overlap 50 的滑动窗口分块，在测试集上召回率最高。\n\n"
+            "```python\n"
+            "from langchain.text_splitter import RecursiveCharacterTextSplitter\n\n"
+            "splitter = RecursiveCharacterTextSplitter(\n"
+            "    chunk_size=512,\n"
+            "    chunk_overlap=50,\n"
+            "    separators=[\"\\n\\n\", \"\\n\", \".\", \"，\", \" \"]\n"
+            ")\n"
+            "docs = splitter.create_documents(raw_texts)\n"
+            "```\n\n"
+            "向量化直接用 sentence-transformers，把每块文本编码成 384 维向量存进 Chroma。"
+            "实测 10 万条 chunk，embedding 耗时约 20 分钟（CPU），可以接受。\n\n"
+            "## 四、检索策略优化\n\n"
+            "RAG 效果好不好，检索是关键。我尝试过几种检索策略：\n\n"
+            "1. 纯语义检索（dense）：效果最好，但慢\n"
+            "2. 关键词检索（BM25）：快但语义理解差\n"
+            "3. 混合检索（hybrid）：先 BM25 粗排，再用 dense 精排\n\n"
+            "最终用混合检索，取 top-5 相关文档传给 LLM。"
+            "加入重排序（rerank）后，准确率从 78% 提升到 91%。\n\n"
+            "## 五、Prompt 调优\n\n"
+            "Prompt 设计遵循「清晰上下文 + 明确任务 + 约束输出格式」三原则：\n\n"
+            "```\n"
+            "你是一名资深客服。请根据以下参考内容，准确回答用户问题。\n"
+            "如果参考内容不足以回答，请如实说明，不要编造。\n\n"
+            "【参考内容】\n"
+            "{context}\n\n"
+            "【用户问题】\n"
+            "{question}\n\n"
+            "【回答要求】\n"
+            "- 语言简洁、专业\n"
+            "- 如有步骤，给出 1/2/3 编号\n"
+            "- 涉及金额或期限的内容要注明"
+            "```\n\n"
+            "## 六、效果评估\n\n"
+            "上线后每周统计客服采纳率和用户满意度："
+            "采纳率从第一周的 62% 提升到第四周的 89%，平均每次处理时间从 4.2 分钟降到 0.9 分钟。"
+            "目前系统日均处理 1200+ 次查询，准确率 91%，客服团队反馈非常正面。\n\n"
+            "RAG 这条路还有很多可以优化的空间：多跳推理、幻觉检测、实时知识更新……"
+            "后续计划引入 vector index 的增量更新，不让知识库成为静态快照。"
+        ),
     },
     {
+        "slug": "user-segmentation-kmeans-rfm",
+        "type": "article",
         "title": "用户分群怎么做？K-Means + RFM 实战笔记",
         "date": "2026-01-20",
         "read_time": "6 min read",
         "desc": "用电商真实数据演示 RFM 模型 + K-Means 分群，找到高价值用户、流失风险用户和潜力用户。",
+        "content": (
+            "精细化运营的前提是对用户有足够的了解。"
+            "大多数公司一开始只看 GMV、UV 这些汇总指标，"
+            "但真正驱动增长的是搞清楚『谁在使用产品、为什么买、为什么流失』。"
+            "本文用一个电商真实数据集，演示 RFM + K-Means 的完整分群方法论。\n\n"
+            "## 一、RFM 模型简介\n\n"
+            "RFM 是用户价值评估的经典框架：\n\n"
+            "- R（Recency）：用户最近一次消费距今多少天，越近越有价值\n"
+            "- F（Frequency）：单位时间内的消费频次，越高频越有价值\n"
+            "- M（Monetary）：单位时间内的消费金额，越高越有价值\n\n"
+            "三个维度组合起来，可以把用户划分成不同群体："
+            "高价值用户、潜力用户、流失风险用户、沉默用户等。"
+            "每个群体的运营策略完全不同，不能一刀切。\n\n"
+            "## 二、数据准备\n\n"
+            "数据来自某中型电商平台 2024 年全年订单，共 48 万条记录，"
+            "去重后约 12 万有效用户。先在 Hive 里把用户维度和交易事实关联好，"
+            "导出 R/F/M 三个指标：\n\n"
+            "```sql\n"
+            "SELECT\n"
+            "    user_id,\n"
+            "    DATEDIFF('2025-01-01', MAX(order_date)) AS recency,  -- R\n"
+            "    COUNT(order_id)                           AS frequency, -- F\n"
+            "    SUM(order_amount)                          AS monetary   -- M\n"
+            "FROM dwd_order\n"
+            "WHERE order_date >= '2024-01-01'\n"
+            "  AND order_status = '已完成'\n"
+            "GROUP BY user_id\n"
+            "```\n\n"
+            "## 三、数据分布与预处理\n\n"
+            "RFM 三个指标的分布通常都是严重右偏的——少数用户贡献了大量消费。"
+            "直接用原始值跑 K-Means 会导致少数异常值主导距离计算。"
+            "标准做法是先做对数变换，再做 Z-Score 标准化：\n\n"
+            "```python\n"
+            "import numpy as np\n"
+            "from sklearn.preprocessing import StandardScaler\n\n"
+            "df['R'] = np.log1p(df['recency'])\n"
+            "df['F'] = np.log1p(df['frequency'])\n"
+            "df['M'] = np.log1p(df['monetary'])\n\n"
+            "scaler = StandardScaler()\n"
+            "rfm_scaled = scaler.fit_transform(df[['R', 'F', 'M']])\n"
+            "```\n\n"
+            "## 四、K-Means 分群\n\n"
+            "K-Means 的 K 怎么定？用肘部法则（Elbow Method）+ 轮廓系数（Silhouette Score）联合判断：\n\n"
+            "```python\n"
+            "from sklearn.cluster import KMeans\n"
+            "from sklearn.metrics import silhouette_score\n\n"
+            "scores = []\n"
+            "for k in range(2, 10):\n"
+            "    km = KMeans(n_clusters=k, random_state=42, n_init=10)\n"
+            "    labels = km.fit_predict(rfm_scaled)\n"
+            "    scores.append(silhouette_score(rfm_scaled, labels))\n\n"
+            "best_k = scores.index(max(scores)) + 2\n"
+            "```\n\n"
+            "测试结果：K=5 时轮廓系数最高（0.63），确定为 5 个用户群体。\n\n"
+            "## 五、分群结果解读\n\n"
+            "跑出来的 5 个群体特征如下：\n\n"
+            "| 群体 | R(天) | F(次) | M(元) | 命名 | 占比 |\n"
+            "|------|-------|-------|-------|------|------|\n"
+            "| 1 | 280 | 1.2 | 89 | 流失风险 | 22% |\n"
+            "| 2 | 45 | 3.1 | 156 | 潜力用户 | 28% |\n"
+            "| 3 | 15 | 8.4 | 632 | 高价值用户 | 18% |\n"
+            "| 4 | 180 | 1.8 | 210 | 沉寂用户 | 24% |\n"
+            "| 5 | 8 | 1.1 | 45 | 新用户 | 8% |\n\n"
+            "## 六、运营策略\n\n"
+            "分群的价值在于指导运营动作：\n\n"
+            "- **群体 3（高价值）**：VIP 专项服务，专属客服、优先发货、专属折扣\n"
+            "- **群体 2（潜力）**：用复购激励（满减券），推动向高价值转化\n"
+            "- **群体 1（流失风险）**：流失预警触发，Push + 专属挽回优惠\n"
+            "- **群体 4（沉寂）**：沉睡唤醒计划，大额券刺激首复购\n"
+            "- **群体 5（新用户）**：新手引导链路完善，重点提升首单转化\n\n"
+            "## 七、效果验证\n\n"
+            "策略上线后追踪 3 个月："
+            "群体 2→3 的转化率达到 31%，群体 1 的流失挽回率 18%，"
+            "整体 GMV 提升约 12%。分群维度的运营比一刀切策略效果好了不止一倍。\n\n"
+            "RFM + K-Means 是入门用户分群的好起点，"
+            "但实际业务中建议逐步引入更多标签（用户画像特征、行为序列），"
+            "让分群结果更精细、更动态。"
+        ),
     },
 ]

@@ -5,6 +5,10 @@
 {% block content %}
 <div class="project-detail-container">
   <div class="project-header reveal">
+    <a href="/" class="back-link">
+      <span>←</span>
+      <span>{{ project.title }}</span>
+    </a>
     <span class="project-badge badge-{{ project.type }}">
       {% if project.type == 'external' %}外部项目{% else %}详细案例{% endif %}
     </span>
@@ -42,10 +46,30 @@
     </ul>
   </div>
   {% endif %}
+
+  {% if project.related %}
+  <div class="content-block reveal">
+    <h2>相关项目</h2>
+    <div class="related-projects-grid">
+      {% for rel_id in project.related %}
+        {% for proj in projects %}
+          {% if proj.id == rel_id %}
+          <a href="/projects/{{ proj.id }}" class="related-card">
+            <div class="related-thumb thumb-fallback">{{ proj.thumb }}</div>
+            <div class="related-info">
+              <div class="related-title">{{ proj.title }}</div>
+              <div class="related-desc">{{ proj.desc[:60] }}…</div>
+            </div>
+          </a>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
 </div>
 
 <script>
-  // Project detail reveal animation (standalone page)
   document.querySelectorAll('.reveal').forEach(function(el) {
     el.classList.add('visible');
   });

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}{{ blog.title }} · {{ personal.name }}{% endblock %}
+
+{% block content %}
+<div class="blog-detail-container">
+  <div class="blog-header reveal">
+    <a href="/" class="back-link">
+      <span>←</span>
+      <span>{{ personal.name }}</span>
+    </a>
+    <div class="blog-meta-top">
+      <span class="blog-type-badge">{{ blog.type | upper }}</span>
+      <span>📅 {{ blog.date }}</span>
+      <span>⏱️ {{ blog.read_time }}</span>
+    </div>
+    <h1>{{ blog.title }}</h1>
+  </div>
+
+  <div class="content-block reveal">
+    <p class="blog-lead">{{ blog.desc }}</p>
+    <hr class="blog-divider">
+    <div class="blog-body">
+      {% for paragraph in blog.content.split('\n\n') %}
+      <p>{{ paragraph }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="blog-footer-nav reveal">
+    <a href="/" class="btn btn-outline">← 返回首页</a>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    el.classList.add('visible');
+  });
+</script>
+{% endblock %}

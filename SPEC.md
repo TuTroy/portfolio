@@ -52,18 +52,13 @@ No hardcoded content in templates.
 ### Frontend Design
 
 **Theme:** Minimal, professional, fast.
+**Theme:** Minimal, professional, fast.
 **Color palette (CSS vars):**
-- `--bg: #f8fafc`
-- `--surface: #ffffff`
-- `--text: #0f172a`
-- `--text2: #64748b`
 - `--accent: #0ea5e9`
+- `--accent-2: #6366f1` (blue-purple gradient, used for primary actions and highlights)
+- `--accent-light: rgba(99, 102, 241, 0.07)`
 - `--accent-dark: #0284c7`
-- `--border: #e2e8f0`
-- `--green: #16a34a`
-- `--purple: #7c3aed`
-- `--shadow`: multi-level shadow system
-- `--radius: 12px`
+- All other vars unchanged
 
 **Fonts:** System fonts (no external CDN dependency).
 **No Tailwind.** Plain CSS with custom properties.
@@ -74,7 +69,9 @@ No hardcoded content in templates.
 - Smooth scroll between sections
 - Scroll-reveal animations (IntersectionObserver, CSS-only transitions)
 - Skill bars animate width when scrolled into view
-- Project cards: hover lift + link icon reveal
+- Project cards: hover lift + link icon reveal + shimmer on thumbnail + title color shift
+- **Project filter**: animated show/hide with staggered fade-in (no abrupt display:none)
+- **Navigation**: active section highlight via IntersectionObserver as user scrolls
 - Navigation: sticky with backdrop blur; hamburger on mobile
 - Contact form: vanilla JS with validation + success state (no Element Plus)
 - Section reveal on scroll using IntersectionObserver

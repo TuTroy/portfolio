@@ -123,8 +123,8 @@
     </div>
 
     <div class="projects-filter reveal">
-      <button class="filter-btn active" data-filter="all">全部</button>
-      <button class="filter-btn" data-filter="local">📝 详细案例</button>
+      <button class="filter-btn active" data-filter="all" data-count="6">全部(6)</button>
+      <button class="filter-btn" data-filter="local" data-count="6">📝 详细案例</button>
     </div>
 
     <div class="projects-grid" id="projects-grid">
@@ -135,13 +135,12 @@
       {% if project.id == 'churn-prediction' %}{% set thumb_class = 'thumb-churn' %}{% endif %}
       {% if project.id == 'sales-dashboard' %}{% set thumb_class = 'thumb-sales' %}{% endif %}
 
-      <div class="project-card reveal" data-type="{{ project.type }}">
+      <div class="project-card reveal" data-type="{{ project.type }}" data-id="{{ project.id }}" data-url="/projects/{{ project.id }}">
         <div class="project-thumb {{ thumb_class }}">
           <span class="project-badge badge-{{ project.type }}">
             {% if project.type == 'external' %}外部项目{% else %}详细案例{% endif %}
           </span>
-          {{ project.thumb }}
-          <a href="/projects/{{ project.id }}" class="project-link-icon" title="查看详情">→</a>
+          <div class="thumb-carousel" data-images="{{ project.thumb }}🤖🛠️📊📈🏗️🤖"></div>
         </div>
         <div class="project-body">
           <div class="project-title">{{ project.title }}</div>
@@ -155,11 +154,6 @@
             {% for tag in project.tags %}
             <span class="ptag">{{ tag }}</span>
             {% endfor %}
-          </div>
-          <div class="project-footer">
-            <a href="/projects/{{ project.id }}" class="proj-link {% if project.type == 'external' %}external{% else %}local{% endif %}">
-              查看详情 →
-            </a>
           </div>
         </div>
       </div>
@@ -177,14 +171,14 @@
     </div>
     <div class="blogs-list">
       {% for blog in blogs %}
-      <a href="#" class="blog-item reveal">
+      <a href="/blogs/{{ blog.slug }}" class="blog-item reveal" data-url="/blogs/{{ blog.slug }}">
         <div class="blog-top">
           <div class="blog-title">{{ blog.title }}</div>
           <div class="blog-arrow">→</div>
         </div>
         <div class="blog-meta">
           <span>{{ blog.date }}</span>
-          <span>{{ blog.read_time }} read</span>
+          <span>{{ blog.read_time }}</span>
         </div>
         <div class="blog-desc">{{ blog.desc }}</div>
       </a>
